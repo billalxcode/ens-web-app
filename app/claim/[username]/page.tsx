@@ -1,4 +1,3 @@
-import CircleDecorations from '@/components/Decorations/CircleDecorations';
 import Footer from '@/components/Footer';
 import ClaimProps from '@/interface/props/ClaimProps';
 import Claim from '@/ui/Claim';

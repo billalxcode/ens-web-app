@@ -70,21 +70,21 @@ export default function ButtonWrapper() {
 		);
 	}
 	return (
-			<Button
-				w={'full'}
-				mt={10}
-				p={7}
-				bgColor={'bg.button.primary'}
-				transition={'all .5s ease-in-out'}
-				_hover={{
-					bgColor: 'bg.button.hover.primary'
-				}}
-				_active={{
-					bgColor: 'bg.button.active.primary'
-				}}
-				onClick={() => openModal()}
-			>
-				Next
-			</Button>
-		);
+		<Button
+			w={'full'}
+			mt={10}
+			p={7}
+			bgColor={'bg.button.primary'}
+			transition={'all .5s ease-in-out'}
+			_hover={{
+				bgColor: 'bg.button.hover.primary'
+			}}
+			_active={{
+				bgColor: 'bg.button.active.primary'
+			}}
+			onClick={() => openModal()}
+		>
+			Next
+		</Button>
+	);
 }

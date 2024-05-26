@@ -33,7 +33,7 @@ export default function Claim(props: ClaimProps) {
 					const estimatedRegistrationData =
 						await estimateRegistration(props.params.username, year);
 					setEstimatedRegistration(estimatedRegistrationData);
-					
+
 					setIsEstimateRegistration(false);
 				}, 1000);
 			}
