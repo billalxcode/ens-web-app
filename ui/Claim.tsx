@@ -1,21 +1,49 @@
 'use client';
-import {
-	Box,
-	Button,
-	Divider,
-	Flex,
-	Heading,
-	Input,
-	Text,
-	VStack
-} from '@chakra-ui/react';
-import React, { useState } from 'react';
+import { Box, Divider, Flex, Heading, Skeleton, Text } from '@chakra-ui/react';
+import React, { useEffect, useState } from 'react';
 import Card from '../components/Card';
 import ClaimProps from '@/interface/props/ClaimProps';
 import RegistrationYearSelection from '@/components/Claim/RegistrationYearSelection';
+import estimateRegistration from '@/logic/estimateRegistration';
+import estimatedRegistrationStates from '@/interface/states/estimatedRegistration';
+import { ethers } from 'ethers';
+import ButtonWrapper from '@/components/Claim/ButtonWrapper';
+import { getGasPrice } from 'viem/actions';
+import client from '@/logic/client';
+import { BigNumberish } from 'ethers';
 
 export default function Claim(props: ClaimProps) {
 	const [year, setYear] = useState<number>(1);
+	const [estimatedRegistration, setEstimatedRegistration] =
+		useState<estimatedRegistrationStates>({
+			registrationFee: BigInt(0),
+			premiumFee: BigInt(0),
+			hasPremium: false
+		});
+	const [gasPrices, setGasPrices] = useState<BigNumberish>(0);
+	const [isEstimateRegistration, setIsEstimateRegistration] = useState(true);
+
+	useEffect(() => {
+		(async () => {
+			if (isEstimateRegistration) {
+				const gasPrice = await getGasPrice(client);
+				console.log(gasPrice);
+				setGasPrices(gasPrice);
+				setTimeout(async () => {
+					const estimatedRegistrationData =
+						await estimateRegistration(props.params.username, year);
+					setEstimatedRegistration(estimatedRegistrationData);
+					
+					setIsEstimateRegistration(false);
+				}, 1000);
+			}
+		})();
+	}, [
+		year,
+		props.params.username,
+		estimatedRegistration,
+		isEstimateRegistration
+	]);
 
 	return (
 		<Box>
@@ -38,6 +66,7 @@ export default function Claim(props: ClaimProps) {
 						<RegistrationYearSelection
 							year={year}
 							setYear={(x) => setYear(x)}
+							setLoading={() => setIsEstimateRegistration(true)}
 						/>
 
 						<Divider opacity={0.5} my={3} />
@@ -53,21 +82,45 @@ export default function Claim(props: ClaimProps) {
 								justify={'space-between'}
 								flexDirection={'row'}
 							>
-								<Text>Estimate Network Fee</Text>
-								<Text>1 ETH</Text>
+								<Text>Registration Fee</Text>
+								<Skeleton
+									isLoaded={!isEstimateRegistration}
+									borderRadius={5}
+									startColor={'bg.skeletonStart'}
+									endColor={'bg.skeletonEnd'}
+								>
+									<Text>
+										{ethers
+											.formatEther(
+												estimatedRegistration.registrationFee
+											)
+											.substring(0, 5)}{' '}
+										ETH
+									</Text>
+								</Skeleton>
 							</Flex>
 							<Flex
 								justify={'space-between'}
 								flexDirection={'row'}
 							>
-								<Text>Estimated Total</Text>
-								<Text>0 ETH</Text>
+								<Text>Gas Price</Text>
+								<Skeleton
+									isLoaded={!isEstimateRegistration}
+									borderRadius={5}
+									startColor={'bg.skeletonStart'}
+									endColor={'bg.skeletonEnd'}
+								>
+									<Text>
+										{ethers
+											.formatUnits(gasPrices, 'gwei')
+											.substring(0, 5)}{' '}
+										GWEI
+									</Text>
+								</Skeleton>
 							</Flex>
 						</Flex>
 
-						<Button w={'full'} mt={10} p={7} bgColor={'bg.blue'}>
-							Connect Wallet
-						</Button>
+						<ButtonWrapper />
 					</Card>
 				</Flex>
 			</Flex>

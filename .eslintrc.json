@@ -10,7 +10,7 @@
 	"rules": {
 		"quotes": ["error", "single"],
 		// we want to force semicolons
-		"semi": ["error", "always"],
+		"semi": "off",
 		"indent": "off",
 		"react/react-in-jsx-scope": "off",
 		"react/no-unescaped-entities": "off",

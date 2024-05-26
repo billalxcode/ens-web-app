@@ -19,7 +19,20 @@ const theme = extendTheme({
 			card2: '#272727',
 			error: '#dc3545',
 			success: '#36ab61',
-			blue: '#5e73e8',
+			skeletonStart: '#393939',
+			skeletonEnd: '#494949',
+			button: {
+				primary: '#5e73e8',
+				hover: {
+					primary: '#605ee8'
+				},
+				active: {
+					primary: '#5e8ae8'
+				},
+				disabled: {
+					primary: '#6f96ea'
+				}
+			},
 			hover: {
 				card2: '#2a2a2a'
 			}

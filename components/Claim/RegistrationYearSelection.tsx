@@ -11,6 +11,7 @@ export default function RegistrationYearSelection(
 	const handleIncreaseButton = () => {
 		const nYear = props.year + 1;
 		props.setYear(nYear);
+		props.setLoading();
 		setValue(`${nYear} YEAR`);
 	};
 
@@ -18,6 +19,7 @@ export default function RegistrationYearSelection(
 		if (props.year >= 1) {
 			const nYear = props.year - 1;
 			props.setYear(nYear);
+			props.setLoading();
 			setValue(`${nYear} YEAR`);
 		}
 	};
