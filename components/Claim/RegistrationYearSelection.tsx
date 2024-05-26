@@ -1,6 +1,6 @@
 'use client';
 import RegistrationYearSelectionProps from '@/interface/props/RegistrationYearSelectionProps';
-import { Box, Button, Flex, Input, Text } from '@chakra-ui/react';
+import { Box, Button, Flex, Input } from '@chakra-ui/react';
 import React, { useState } from 'react';
 
 export default function RegistrationYearSelection(

@@ -5,10 +5,12 @@ import Claim from '@/ui/Claim';
 import Header from '@/components/Header';
 import { Flex } from '@chakra-ui/react';
 import React from 'react';
+import BackgroundParticles from '@/components/Decorations/BackgroundParticles';
 
 export default function Page(props: ClaimProps) {
 	return (
 		<>
+			<BackgroundParticles />
 			<CircleDecorations />
 			<Header />
 

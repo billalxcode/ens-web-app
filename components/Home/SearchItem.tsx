@@ -21,7 +21,7 @@ export default function SearchItem(props: SearchItemProps) {
 			transition={'all .2s ease-in-out'}
 			cursor={'pointer'}
 			_hover={{ bgColor: 'bg.hover.card2' }}
-			onClick={(e) => handleClick()}
+			onClick={() => handleClick()}
 		>
 			<Text fontWeight={'semibold'}>{props.username}</Text>
 			{props.available ? <Available /> : <Unavailable />}

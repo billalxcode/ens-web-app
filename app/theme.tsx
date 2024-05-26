@@ -1,9 +1,5 @@
 'use client';
-import {
-	ChakraProvider,
-	StyleFunctionProps,
-	extendTheme
-} from '@chakra-ui/react';
+import { ChakraProvider, extendTheme } from '@chakra-ui/react';
 import React from 'react';
 import { Web3Modal } from '../context/Web3Modal';
 
@@ -19,7 +15,7 @@ const theme = extendTheme({
 		},
 		bg: {
 			body: '#151515',
-			card: '#1f1f1f',
+			card: '#1f1f1fCC',
 			card2: '#272727',
 			error: '#dc3545',
 			success: '#36ab61',
@@ -30,7 +26,7 @@ const theme = extendTheme({
 		}
 	},
 	styles: {
-		global: (props: StyleFunctionProps) => ({
+		global: () => ({
 			body: {
 				bg: 'bg.body',
 				color: 'primary.text'

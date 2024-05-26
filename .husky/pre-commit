@@ -1,8 +1,6 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-npx lint-staged
-
 echo '🏗️👷 Styling, testing and checking your code before committing'
 
 # Check Prettier standars
@@ -13,7 +11,7 @@ npm run check-format || (
 )
 
 # Check ESLint Standards
-npm run check-lint ||
+npm run lint ||
 (
         echo '😤🏀👋😤 Get that weak stuff out of here! 😤🏀👋😤 
                 ESLint Check Failed. Make the required changes listed above, add changes and try to commit again.'

@@ -1,5 +1,5 @@
-import { Box, Flex, Heading, Input, Text, VStack } from '@chakra-ui/react';
-import React, { KeyboardEvent, useEffect, useRef, useState } from 'react';
+import { Box, Flex, Heading, Input, Text } from '@chakra-ui/react';
+import React, { KeyboardEvent, useState } from 'react';
 import Card from '../components/Card';
 import SearchBox from '../components/Home/SearchBox';
 import HowItWorks from '../components/Home/HowItWorks';
@@ -9,7 +9,7 @@ export default function Home() {
 	const [searchQuery, setSearchQuery] = useState<string>('');
 
 	const checkSpecialChar = (event: KeyboardEvent<HTMLInputElement>) => {
-		if (!/[0-9a-zA-Z]/.test(event.key)) {
+		if (!/[0-9a-z]/i.test(event.key)) {
 			event.preventDefault();
 		}
 	};

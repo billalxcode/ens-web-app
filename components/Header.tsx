@@ -4,7 +4,7 @@ import React from 'react';
 
 export default function Header() {
 	return (
-		<Box bgColor={'bg.body'} boxShadow={'md'}>
+		<Box bgColor={'bg.body'} boxShadow={'md'} position={'sticky'}>
 			<Flex justify={'space-between'} p={5} mx={5}>
 				<Flex align={'center'}>
 					<Image

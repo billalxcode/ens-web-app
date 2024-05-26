@@ -1,4 +1,4 @@
-import { Box, Collapse, Flex, Text } from '@chakra-ui/react';
+import { Box, Collapse, Flex } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import SearchItem from './SearchItem';
 import SearchBoxProps from '@/interface/props/SearchBoxProps';
@@ -29,7 +29,7 @@ export default function SearchBox(props: SearchBoxProps) {
 				} catch (e: any) {}
 			}
 		})();
-	}, [domain, debouncedSearch]);
+	}, [domain, debouncedSearch, props.searchQuery]);
 
 	return (
 		<Collapse

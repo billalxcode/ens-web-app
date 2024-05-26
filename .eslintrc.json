@@ -1,7 +1,27 @@
 {
 	"extends": [
+		"next/core-web-vitals",
+		"eslint:recommended",
 		"plugin:react/recommended",
-		"plugin:prettier/recommended",
-		"prettier"
-	]
+		"plugin:regexp/recommended",
+		"plugin:@typescript-eslint/eslint-recommended",
+		"plugin:@typescript-eslint/recommended"
+	],
+	"rules": {
+		"quotes": ["error", "single"],
+		// we want to force semicolons
+		"semi": ["error", "always"],
+		"indent": "off",
+		"react/react-in-jsx-scope": "off",
+		"react/no-unescaped-entities": "off",
+		"no-empty": "off",
+		"@typescript-eslint/no-explicit-any": "warn"
+	},
+	"parserOptions": {
+		"ecmaVersion": 2018,
+		"sourceType": "module",
+		"ecmaFeatures": {
+			"jsx": true
+		}
+	}
 }

@@ -12,7 +12,7 @@ const wordlists = [
 ];
 
 export default function suggestDomains(username: string) {
-	let suggestions: Array<string> = [];
+	const suggestions: Array<string> = [];
 
 	wordlists.forEach((v) => {
 		suggestions.push(`${username}${v}.eth`);
