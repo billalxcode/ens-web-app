@@ -9,7 +9,6 @@ export default function Page() {
 	return (
 		<>
 			<BackgroundParticles />
-			{/* <CircleDecorations /> */}
 			<Header />
 			<Flex justify={'center'} align={'center'} h={'80vh'} zIndex={10}>
 				<Home />

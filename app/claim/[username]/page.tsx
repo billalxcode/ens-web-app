@@ -10,7 +10,6 @@ export default function Page(props: ClaimProps) {
 	return (
 		<>
 			<BackgroundParticles />
-			{/* <CircleDecorations /> */}
 			<Header />
 
 			<Flex justify={'center'} align={'center'} h={'80vh'}>
