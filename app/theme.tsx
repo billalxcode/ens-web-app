@@ -22,7 +22,7 @@ const theme = extendTheme({
 			skeletonStart: '#393939',
 			skeletonEnd: '#494949',
 			button: {
-				primary: '#5e73e8',
+				primary: '#5e83ff',
 				hover: {
 					primary: '#605ee8'
 				},
