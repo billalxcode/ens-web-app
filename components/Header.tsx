@@ -4,13 +4,18 @@ import React from 'react';
 
 export default function Header() {
 	return (
-		<Box bgColor={'bg.body'} boxShadow={'md'} position={'sticky'}>
+		<Box
+			bgColor={'bg.body'}
+			boxShadow={'md'}
+			position={'sticky'}
+			zIndex={100}
+		>
 			<Flex justify={'space-between'} p={5} mx={5}>
 				<Flex align={'center'}>
 					<Image
-						src="/images/ethereum-name-service-ens-logo.png"
-						alt="ENS Logo"
-						width={10}
+						src="/images/Atlanta.png"
+						alt="Atlanta Logo"
+						width={20}
 					/>
 					<Link href="/" textDecoration={'none'}>
 						<Heading
@@ -18,8 +23,9 @@ export default function Header() {
 							textDecoration={'none'}
 							size={'md'}
 							mx={3}
+							opacity={0.8}
 						>
-							Your Site
+							Atlanta Domains
 						</Heading>
 					</Link>
 				</Flex>
