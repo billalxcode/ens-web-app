@@ -1,33 +1,77 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import Card from '../Card';
-import { Button, Divider, Flex, Heading, Text } from '@chakra-ui/react';
+import {
+	Box,
+	Button,
+	Divider,
+	Flex,
+	Heading,
+	Text,
+	useToast
+} from '@chakra-ui/react';
 import CircularCountdown from '../CircularCountdown';
 import FormCommitProps from '@/interface/props/FormCommitProps';
 import { randomSecret } from '@ensdomains/ensjs/utils';
-import { commitName } from '@ensdomains/ensjs/wallet';
-import { createWalletClient } from '@/logic/client';
+import { commitName, registerName } from '@ensdomains/ensjs/wallet';
+import client, { createWalletClient } from '@/logic/client';
 import { useWeb3ModalProvider } from '@web3modal/ethers/react';
+import { getPrice } from '@ensdomains/ensjs/public';
 
 export default function FormCommit(props: FormCommitProps) {
+	const toast = useToast();
+	const toastIdRef = useRef();
 	const { walletProvider } = useWeb3ModalProvider();
 	const [isStartCountdown, setIsStartCountdown] = useState(false);
 	const startCountdown = () => {};
 
 	const handleCommitClick = async () => {
+		// toast({
+		// 	description: 'Making a commitment',
+		// 	position: 'top-right',
+		// 	status: 'loading',
+		// 	render: (props) => {
+		// 		return (
+		// 			<Box
+		// 				bgColor={'bg.success'}
+		// 				color={'primary.text'}
+		// 				p={3}
+		// 				borderRadius={4}
+		// 			>
+		// 				{props.description}
+		// 			</Box>
+		// 		);
+		// 	}
+		// });
+
 		const wallet = createWalletClient(walletProvider);
 		const walletOwner = props.owner as `0x${string}`;
 
 		const duration = props.duration * 60 * 60 * 24 * 365;
 		const secret = randomSecret();
 
-		const params = {};
-		const commitmentHash = await commitName(wallet, {
+		const params = {
 			name: props.name,
 			owner: walletOwner,
 			duration: duration,
-			secret: secret
+			secret,
+			account: walletOwner
+		};
+
+		const commitmentHash = await commitName(wallet, params);
+		await client.waitForTransactionReceipt({ hash: commitmentHash }); // wait for commitment to finalise
+		setIsStartCountdown(true);
+		await new Promise((resolve) => setTimeout(resolve, 60 * 1_000)); // wait for commitment to be valid
+		setIsStartCountdown(false);
+
+		const { base, premium } = await getPrice(client, {
+			nameOrNames: params.name,
+			duration: params.duration
 		});
+
+		const value =
+			((BigInt(base) + BigInt(premium)) * BigInt(110)) / BigInt(100); // add 10% to the price for buffer
+		const hash = await registerName(wallet, { ...params, value });
 	};
 
 	return (
