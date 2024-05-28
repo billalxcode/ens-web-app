@@ -23,18 +23,17 @@ export default function HowItWorks() {
 						>
 							<Heading size={'md'}>1.</Heading>
 						</Flex>
-						<Heading size={'md'}>
-							Participate in the auction
-						</Heading>
+						<Heading size={'md'}>Find your name</Heading>
 					</Flex>
 					<Text textAlign={'justify'}>
-						To get started, mint a domain name NFT by paying $100 in
-						$TOMI tokens. As the first minter, you'll receive a
-						Partner NFT that entitles you to 25% of all future sales
-						royalties for that domain. When someone places the first
-						bid on your domain, you'll receive 20% of the difference
-						between the bid price and the $100 minting fee, plus 25%
-						of the final sale price as royalties
+						Connect your wallet, then enter your preferred name
+						(YOUR_NAME.eth) in the search field. Next, choose a
+						domain name that is accessible. Click on the name if it
+						matches the one you were looking for. Choose the time
+						duration, then click "Next." Be aware that you will
+						always be responsible for paying the gas fee, which is
+						frequently more expensive than the cost of the domain
+						itself.
 					</Text>
 				</Box>
 				<Box w={300}>
@@ -46,20 +45,16 @@ export default function HowItWorks() {
 						>
 							<Heading size={'md'}>2.</Heading>
 						</Flex>
-						<Heading size={'md'}>
-							Mint a domain and becoome a partner
-						</Heading>
+						<Heading size={'md'}>Process commitment </Heading>
 					</Flex>
 					<Text textAlign={'justify'}>
-						Anyone can place a higher bid on a domain by offering at
-						least 15% more than the current highest bid, paid in
-						$TOMI tokens. If your bid is outbid, you'll receive your
-						original purchase price back, plus an additional 20% of
-						the difference between your bid and the new highest bid.
-						The original minter (Partner) will receive 25% of the
-						difference between the new bid and the previous highest
-						bid as royalties. All payments and rewards are handled
-						through the tomi Domains dApp.
+						Before processing the commitment, you can create your
+						profile or choose to skip it so that you can create your
+						profile later. On the commitment page, click "commit."
+						This timer on the commitment page helps prevent others
+						from registering the name before you do. Your name is
+						not registered until you've completed the second
+						transaction.
 					</Text>
 				</Box>
 				<Box w={300}>
@@ -71,18 +66,17 @@ export default function HowItWorks() {
 						>
 							<Heading size={'md'}>3.</Heading>
 						</Flex>
-						<Heading size={'md'}>
-							Place a bid and own a domain
-						</Heading>
+						<Heading size={'md'}>Finish the registration</Heading>
 					</Flex>
 					<Text textAlign={'justify'}>
-						To win a domain, place a bid that is at least 15% higher
-						than the current highest bid price. When you outbid
-						someone, the previous highest bidder will receive their
-						original bid amount back, plus an additional 20% of
-						their bid price. Once the auction ends on May 15, 2024,
-						the highest bidder will permanently own the domain URL
-						and its associated NFT, with no renewal fees required.
+						The Atlanta app will display the "Register" button after
+						waiting a while. Click on it. Next, be sure to verify in
+						your wallet that this is the second transaction. You can
+						now proudly own your own ETH domain. Congratulations!
+						That being said, you ought to be able to see your domain
+						in your wallet's NFT area. Because not every wallet has
+						that feature, you can use NFT marketplaces or
+						alternative portfolio tracking apps.
 					</Text>
 				</Box>
 			</Flex>
