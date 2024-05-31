@@ -9,6 +9,7 @@ import { useWeb3ModalAccount } from '@web3modal/ethers/react';
 export default function Claim(props: ClaimProps) {
 	const [step, setStep] = useState('registration');
 	const [durationInYear, setDurationInYear] = useState(1);
+	const [isPrimaryName, setIsPrimaryName] = useState(true)
 
 	const { address: ownerAddress } = useWeb3ModalAccount();
 
@@ -19,7 +20,9 @@ export default function Claim(props: ClaimProps) {
 					params={props.params}
 					setStep={(newStep: string) => setStep(newStep)}
 					setDurationInYear={(year) => setDurationInYear(year)}
+					setIsPrimaryName={(checked) => setIsPrimaryName(checked)}
 					durationInYear={durationInYear}
+					isPrimaryName={isPrimaryName}
 				/>
 			);
 		} else if (step == 'commit') {
