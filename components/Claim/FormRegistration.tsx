@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import Card from '../Card';
 import RegistrationYearSelection from './RegistrationYearSelection';
-import { Divider, Flex, Skeleton, Text } from '@chakra-ui/react';
+import { Divider, Flex, Skeleton, Switch, Text } from '@chakra-ui/react';
 import ButtonWrapper from './ButtonWrapper';
 import estimateRegistration from '@/logic/estimateRegistration';
 import { ethers } from 'ethers';
@@ -11,6 +11,7 @@ import estimatedRegistrationStates from '@/interface/states/estimatedRegistratio
 import { getGasPrice } from 'viem/actions';
 import { BigNumberish } from 'ethers';
 import FormRegistrationProps from '@/interface/props/FormRegistrationProps';
+import { css } from '@emotion/react';
 
 export default function FormRegistration(props: FormRegistrationProps) {
 	const [estimatedRegistration, setEstimatedRegistration] =
@@ -91,6 +92,20 @@ export default function FormRegistration(props: FormRegistrationProps) {
 							GWEI
 						</Text>
 					</Skeleton>
+				</Flex>
+
+				<Flex justify={'space-between'} flexDirection={'row'}>
+					<Text>Set as primary</Text>
+					<Switch
+						css={css`
+							.chakra-switch__thumb:checked
+								+ .chakra-switch__track {
+								background-color: #8aa9f2;
+							}
+						`}
+						onChange={(e) => props.setIsPrimaryName(e.target.checked)}
+						isChecked={props.isPrimaryName}
+					/>
 				</Flex>
 			</Flex>
 
