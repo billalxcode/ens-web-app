@@ -1,8 +1,8 @@
 import { Box } from '@chakra-ui/react';
-import React from 'react'
+import React from 'react';
 
 export default function ToasterInfo(props: { description: string }) {
-  return (
+	return (
 		<Box
 			bgColor={'bg.primary'}
 			color={'primary.text'}
@@ -11,5 +11,5 @@ export default function ToasterInfo(props: { description: string }) {
 		>
 			{props.description}
 		</Box>
-  );
+	);
 }

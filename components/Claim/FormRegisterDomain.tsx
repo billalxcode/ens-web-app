@@ -1,8 +1,6 @@
-'use client'
-import React from 'react'
+'use client';
+import React from 'react';
 
 export default function FormRegisterDomain() {
-  return (
-    <div>FormRegisterDomain</div>
-  )
+	return <div>FormRegisterDomain</div>;
 }

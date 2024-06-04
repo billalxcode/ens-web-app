@@ -1,7 +1,9 @@
 import { Box, Flex, Spinner, Text } from '@chakra-ui/react';
 import React from 'react';
 
-export default function ToasterLoading(props: { description: React.ReactNode }) {
+export default function ToasterLoading(props: {
+	description: React.ReactNode;
+}) {
 	return (
 		<Box
 			bgColor={'bg.button.primary'}
@@ -10,8 +12,8 @@ export default function ToasterLoading(props: { description: React.ReactNode }) 
 			borderRadius={4}
 		>
 			<Flex gap={3}>
-            	<Spinner speed='.5s' /> <Text>{ props.description }</Text>
+				<Spinner speed=".5s" /> <Text>{props.description}</Text>
 			</Flex>
-        </Box>
+		</Box>
 	);
 }

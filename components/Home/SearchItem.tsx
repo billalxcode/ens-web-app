@@ -11,7 +11,7 @@ export default function SearchItem(props: SearchItemProps) {
 		if (props.available) {
 			location.replace(`/claim/${username}`);
 		} else {
-			location.replace(`/profile/${username}`)
+			location.replace(`/profile/${username}`);
 		}
 	};
 

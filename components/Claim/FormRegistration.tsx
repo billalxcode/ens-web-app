@@ -103,7 +103,9 @@ export default function FormRegistration(props: FormRegistrationProps) {
 								background-color: #8aa9f2;
 							}
 						`}
-						onChange={(e) => props.setIsPrimaryName(e.target.checked)}
+						onChange={(e) =>
+							props.setIsPrimaryName(e.target.checked)
+						}
 						isChecked={props.isPrimaryName}
 					/>
 				</Flex>

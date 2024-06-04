@@ -1,6 +1,6 @@
 'use client';
 import { Box, Flex, Heading, Text } from '@chakra-ui/react';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import ClaimProps from '@/interface/props/ClaimProps';
 import FormRegistration from '@/components/Claim/FormRegistration';
 import FormCommit from '@/components/Claim/FormCommit';
@@ -9,7 +9,7 @@ import { useWeb3ModalAccount } from '@web3modal/ethers/react';
 export default function Claim(props: ClaimProps) {
 	const [step, setStep] = useState('registration');
 	const [durationInYear, setDurationInYear] = useState(1);
-	const [isPrimaryName, setIsPrimaryName] = useState(true)
+	const [isPrimaryName, setIsPrimaryName] = useState(true);
 
 	const { address: ownerAddress } = useWeb3ModalAccount();
 

@@ -1,5 +1,5 @@
 export default interface ProfileProps {
-    params: {
-        username: string
-    }
+	params: {
+		username: string;
+	};
 }
