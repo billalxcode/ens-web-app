@@ -501,7 +501,6 @@ export default function BackgroundParticles() {
 			pauseOnBlur: true,
 			pauseOnOutsideViewport: true,
 			smooth: false,
-			style: {},
 			zLayers: 1,
 			name: 'Parallax',
 			style: {
