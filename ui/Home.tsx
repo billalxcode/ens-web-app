@@ -78,7 +78,7 @@ export default function Home() {
 							>
 								<Image src="/images/search.svg" w={50} />
 								<Heading size={'md'} textAlign={'center'}>
-									SEARCH FOR A DOMAIN
+									FIND YOUR DOMAIN
 								</Heading>
 							</Flex>
 							<Flex
@@ -89,7 +89,7 @@ export default function Home() {
 							>
 								<Image src="/images/partner.svg" w={50} />
 								<Heading size={'md'} textAlign={'center'}>
-									MINT & BECOME A PARTNER
+									PROCESS COMITMENT
 								</Heading>
 							</Flex>
 							<Flex
@@ -100,7 +100,7 @@ export default function Home() {
 							>
 								<Image src="/images/auction.svg" w={50} />
 								<Heading size={'md'} textAlign={'center'}>
-									WIN THE AUCTION
+									FINISH REGISTRATION
 								</Heading>
 							</Flex>
 							<Flex
@@ -117,7 +117,7 @@ export default function Home() {
 						</Flex>
 					</Box>
 				</Flex>
-				<HowItWorks /> 
+				<HowItWorks />
 			</Box>
 		</>
 	);
