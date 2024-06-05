@@ -1,9 +1,8 @@
 import { PaymentAbi } from '@/contracts/payment';
 import { RegistrationTuple } from '@ensdomains/ensjs/utils';
-import { WalletClient, encodeFunctionData } from 'viem';
-import client from './client';
+import { encodeFunctionData } from 'viem';
 
-const createPaymentData = async (args: RegistrationTuple, value: bigint) => {
+const createPaymentData = (args: RegistrationTuple) => {
 	// const paymentContract = await wallet.writeContract({
 	//     address: '0x3A9580b04Bf1e81c242Fb4b7F2e79e6794bfE8fE',
 	//     abi: PaymentAbi,
@@ -14,7 +13,7 @@ const createPaymentData = async (args: RegistrationTuple, value: bigint) => {
 	const data = encodeFunctionData({
 		abi: PaymentAbi,
 		functionName: 'registerName',
-		args: [...args]
+		args: args
 	});
 	return data;
 	// return paymentContract

@@ -7,10 +7,11 @@ export default function Header() {
 		<Box
 			bgColor={'bg.body'}
 			boxShadow={'md'}
-			position={'sticky'}
+			position={'absolute'}
 			zIndex={100}
+			w={"full"}
 		>
-			<Flex justify={'space-between'} p={5} mx={5}>
+			<Flex justify={'space-between'} p={3} mx={5} align={"center"}>
 				<Flex align={'center'}>
 					<Image
 						src="/images/Atlanta.png"

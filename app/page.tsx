@@ -8,11 +8,9 @@ import BackgroundParticles from '@/components/Decorations/BackgroundParticles';
 export default function Page() {
 	return (
 		<>
-			<BackgroundParticles />
+			{/* <BackgroundParticles /> */}
 			<Header />
-			<Flex justify={'center'} align={'center'} h={'80vh'} zIndex={10}>
-				<Home />
-			</Flex>
+			<Home />
 
 			<Footer />
 		</>

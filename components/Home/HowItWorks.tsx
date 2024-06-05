@@ -7,14 +7,16 @@ export default function HowItWorks() {
 			justify={'center'}
 			align={'center'}
 			flexDirection={'column'}
-			my={100}
+			mt={200}
+			zIndex={100}
+			borderRadius={5}
 		>
 			<Heading size={'xl'} mb={10}>
 				How it works
 			</Heading>
 
-			<Flex gap={50}>
-				<Box w={300}>
+			<Flex gap={30}>
+				<Box w={400} bgColor={'bg.card'} p={5} borderRadius={5}>
 					<Flex h={70} align={'center'} gap={3}>
 						<Flex
 							justify={'center'}
@@ -25,18 +27,14 @@ export default function HowItWorks() {
 						</Flex>
 						<Heading size={'md'}>Find your name</Heading>
 					</Flex>
-					<Text textAlign={'justify'}>
-						Connect your wallet, then enter your preferred name
-						(YOUR_NAME.eth) in the search field. Next, choose a
-						domain name that is accessible. Click on the name if it
-						matches the one you were looking for. Choose the time
-						duration, then click "Next." Be aware that you will
-						always be responsible for paying the gas fee, which is
-						frequently more expensive than the cost of the domain
-						itself.
+					<Text textAlign={'justify'} fontWeight={200}>
+						Connect your wallet, enter your desired name
+						(YOUR_NAME.eth), and search. Select an available domain,
+						choose the duration, and click "Next." Remember to pay
+						the gas fee.
 					</Text>
 				</Box>
-				<Box w={300}>
+				<Box w={400} bgColor={'bg.card'} p={5} borderRadius={5}>
 					<Flex h={70} align={'center'} gap={3}>
 						<Flex
 							justify={'center'}
@@ -45,19 +43,16 @@ export default function HowItWorks() {
 						>
 							<Heading size={'md'}>2.</Heading>
 						</Flex>
-						<Heading size={'md'}>Process commitment </Heading>
+						<Heading size={'md'}>Process commitment</Heading>
 					</Flex>
-					<Text textAlign={'justify'}>
-						Before processing the commitment, you can create your
-						profile or choose to skip it so that you can create your
-						profile later. On the commitment page, click "commit."
-						This timer on the commitment page helps prevent others
-						from registering the name before you do. Your name is
-						not registered until you've completed the second
-						transaction.
+					<Text textAlign={'justify'} fontWeight={200}>
+						You can create a profile now or later. On the commitment
+						page, click "commit." The timer ensures no one else
+						registers the name before you. Complete the second
+						transaction to finalize.
 					</Text>
 				</Box>
-				<Box w={300}>
+				<Box w={400} bgColor={'bg.card'} p={5} borderRadius={5}>
 					<Flex h={70} align={'center'} gap={3}>
 						<Flex
 							justify={'center'}
@@ -68,15 +63,11 @@ export default function HowItWorks() {
 						</Flex>
 						<Heading size={'md'}>Finish the registration</Heading>
 					</Flex>
-					<Text textAlign={'justify'}>
-						The Atlanta app will display the "Register" button after
-						waiting a while. Click on it. Next, be sure to verify in
-						your wallet that this is the second transaction. You can
-						now proudly own your own ETH domain. Congratulations!
-						That being said, you ought to be able to see your domain
-						in your wallet's NFT area. Because not every wallet has
-						that feature, you can use NFT marketplaces or
-						alternative portfolio tracking apps.
+					<Text textAlign={'justify'} fontWeight={200}>
+						After a brief wait, click "Register" in the Atlanta app
+						and confirm the second transaction in your wallet. Your
+						ETH domain is now yours. Check your wallet's NFT area or
+						use an NFT marketplace to view it.
 					</Text>
 				</Box>
 			</Flex>

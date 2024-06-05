@@ -3,7 +3,7 @@ import React from 'react';
 
 export default function Footer() {
 	return (
-		<Box w={'full'} h={50} bg={'bg.card'} position={'fixed'} bottom={0}>
+		<Box w={'full'} h={50} bg={'bg.card'} position={'fixed'} bottom={0} zIndex={1000000}>
 			<Flex
 				justify={'center'}
 				align={'center'}

@@ -361,7 +361,7 @@ export default function BackgroundParticles() {
 					width: 0
 				},
 				zIndex: {
-					value: -99,
+					value: 0.5,
 					opacityRate: 1,
 					sizeRate: 1,
 					velocityRate: 1

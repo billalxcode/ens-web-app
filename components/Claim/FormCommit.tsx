@@ -7,6 +7,7 @@ import {
 	Divider,
 	Flex,
 	Heading,
+	Link,
 	Text,
 	useToast
 } from '@chakra-ui/react';
@@ -17,17 +18,21 @@ import {
 	makeRegistrationTuple,
 	randomSecret
 } from '@ensdomains/ensjs/utils';
-import { commitName } from '@ensdomains/ensjs/wallet';
+import { commitName, registerName } from '@ensdomains/ensjs/wallet';
 import client, { createWalletClient } from '@/logic/client';
 import { useWeb3ModalProvider } from '@web3modal/ethers/react';
 import {
+	Address,
 	TransactionExecutionError,
-	WalletClient
+	WalletClient,
+	encodeFunctionData
 } from 'viem';
 import ToasterSuccess from '../Toaster/ToasterSuccess';
 import ToasterLoading from '../Toaster/ToasterLoading';
 import { getPaymentPrices } from '@/logic/prices';
 import { sendTransaction } from 'viem/actions';
+import { createPaymentData } from '@/logic/payment';
+import { PaymentAbi } from '@/contracts/payment';
 
 export default function FormCommit(props: FormCommitProps) {
 	const toast = useToast();
@@ -40,21 +45,29 @@ export default function FormCommit(props: FormCommitProps) {
 		params: RegistrationParameters,
 		paymentPrice: bigint
 	) => {
-		console.log('Making registration tuple');
 		const registrationParams = makeRegistrationTuple({
 			name: params.name,
 			owner: params.owner as `0x${string}`,
 			duration: params.duration,
-			resolverAddress:
-				'0x8FADE66B79cC9f707aB26799354482EB93a5B7dD' as `0x${string}`,
+			// resolverAddress:
+			// 	'0x8FADE66B79cC9f707aB26799354482EB93a5B7dD' as `0x${string}`,
 			secret: params.secret as `0x${string}`
 		});
-		console.log('create payment contract');
-		// sendTransaction(wallet, {
-		// 	to
-		// })
-		// console.log(hash)
-		// return hash
+		const paymentData = createPaymentData(registrationParams)
+		const hash = await wallet.sendTransaction({
+			to: '0x3A9580b04Bf1e81c242Fb4b7F2e79e6794bfE8fE' as Address,
+			data: encodeFunctionData({
+				abi: PaymentAbi,
+				functionName: 'registerName',
+				args: registrationParams
+			}),
+			account: (await wallet.getAddresses())[0],
+			gas: BigInt(333508),
+			chain: wallet.chain,	
+			value: paymentPrice
+		});
+		await client.waitForTransactionReceipt({ hash })
+		return hash
 	};
 
 	const handleCommitClick = async () => {
@@ -81,7 +94,7 @@ export default function FormCommit(props: FormCommitProps) {
 				secret: secret,
 				account: walletOwner
 			};
-
+			// console.log(registerName.makeFunctionData(wallet, params))
 			const commitmentHash = await commitName(wallet, params);
 			toast({
 				description: 'Please wait for transaction receipt',
@@ -110,7 +123,7 @@ export default function FormCommit(props: FormCommitProps) {
 				}
 			});
 			setIsStartCountdown(true);
-			await new Promise((resolve) => setTimeout(resolve, 60 * 1_000)); // wait for commitment to be valid
+			await new Promise((resolve) => setTimeout(resolve, 80 * 1_000)); // wait for commitment to be valid
 			setIsStartCountdown(false);
 
 			toast({
@@ -152,41 +165,31 @@ export default function FormCommit(props: FormCommitProps) {
 				props.name,
 				props.duration
 			);
-			console.log(prices);
-			await handlePayment(wallet, params, prices[1]);
-			// const { base, premium } = await getPrice(client, {
-			// 	nameOrNames: params.name,
-			// 	duration: params.duration
-			// });
-
-			// const value =
-			// 	((BigInt(base) + BigInt(premium)) * BigInt(110)) / BigInt(100); // add 10% to the price for buffer
-			// console.log(value)
-
-			// const hash = await registerName(wallet, { ...params, value });
-			// toast({
-			// 	description: 'Successfully to register domain, check ',
-			// 	position: 'top-right',
-			// 	status: 'loading',
-			// 	render: (props) => {
-			// 		return (
-			// 			<Box
-			// 				bgColor={'bg.success'}
-			// 				color={'primary.text'}
-			// 				p={3}
-			// 				borderRadius={4}
-			// 			>
-			// 				{props.description}{' '}
-			// 				<Link
-			// 					href={`https://etherscan.io/${hash}`}
-			// 					color={'primary.text'}
-			// 				>
-			// 					Etherscan
-			// 				</Link>
-			// 			</Box>
-			// 		);
-			// 	}
-			// });
+			const hash = await handlePayment(wallet, params, prices[1]);
+			
+			toast({
+				description: 'Successfully to register domain, check ',
+				position: 'top-right',
+				status: 'loading',
+				render: (props) => {
+					return (
+						<Box
+							bgColor={'bg.success'}
+							color={'primary.text'}
+							p={3}
+							borderRadius={4}
+						>
+							{props.description}{' '}
+							<Link
+								href={`https://etherscan.io/${hash}`}
+								color={'primary.text'}
+							>
+								Etherscan
+							</Link>
+						</Box>
+					);
+				}
+			});
 		} catch (e) {
 			if (e instanceof TransactionExecutionError) {
 				toast({
@@ -225,7 +228,7 @@ export default function FormCommit(props: FormCommitProps) {
 			</Text>
 			<Divider opacity={0.5} my={3} />
 
-			<CircularCountdown initialTimer={60} isStart={isStartCountdown} />
+			<CircularCountdown initialTimer={80} isStart={isStartCountdown} />
 
 			<Flex gap={3} mt={10}>
 				<Button
