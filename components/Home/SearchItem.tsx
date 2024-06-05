@@ -27,7 +27,7 @@ export default function SearchItem(props: SearchItemProps) {
 			_hover={{ bgColor: 'bg.hover.card2' }}
 			onClick={() => handleClick()}
 		>
-			<Text fontWeight={'semibold'}>{props.username}</Text>
+			<Text fontWeight={500}>{props.username}</Text>
 			{props.available ? <Available /> : <Unavailable />}
 		</Flex>
 	);

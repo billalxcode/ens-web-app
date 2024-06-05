@@ -20,6 +20,7 @@ const theme = extendTheme({
 			card2: '#272727',
 			error: '#dc3545',
 			success: '#36ab61',
+			secondary: '#CFB6FC',
 			skeletonStart: '#393939',
 			skeletonEnd: '#494949',
 			button: {

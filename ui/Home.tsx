@@ -1,4 +1,12 @@
-import { Box, Flex, Heading, Image, Input, Text } from '@chakra-ui/react';
+import {
+	Box,
+	Button,
+	Flex,
+	Heading,
+	Image,
+	Input,
+	Text
+} from '@chakra-ui/react';
 import React, { KeyboardEvent, useState } from 'react';
 import Card from '../components/Card';
 import SearchBox from '../components/Home/SearchBox';
@@ -22,43 +30,97 @@ export default function Home() {
 				align={'center'}
 				h={'100vh'}
 			>
-				<Card>
-					<Flex
-						flexDirection={'column'}
-						justify={'center'}
-						align={'center'}
-						gap={2}
-					>
-						<Heading size={'lg'} mb={2}>
-							Atlanta Name Service
-						</Heading>
-						<Text mx={30} textAlign={'center'}>
-							Your identity across web3, one name for all your
-							crypto addresses, and your decentralised website.
-						</Text>
-					</Flex>
-
-					<Box w={'full'} transition={'all .2s ease-in-out'}>
-						<Input
-							placeholder="Search names or addresses"
-							p={8}
-							mt={10}
-							onKeyDown={(e) => checkSpecialChar(e)}
-							onFocus={() => setSearchFocus(true)}
-							onBlur={() => setSearchFocus(false)}
-							onChange={(e) => setSearchQuery(e.target.value)}
-							_focusVisible={{
-								borderColor: 'bg.blue',
-								boxShadow: 'md'
-							}}
+				<Flex
+					mt={50}
+					align={'center'}
+					justify={'center'}
+					gap={40}
+					flexDirection={'row-reverse'}
+				>
+					<Box>
+						<Image
+							src="/images/atlanta-animation.gif"
+							h={'500px'}
 						/>
-
-						<SearchBox
-							hidden={searchFocus && searchQuery !== ''}
-							searchQuery={searchQuery}
+						<Box
+							bg={'bg.secondary'}
+							w={300}
+							h={300}
+							position={'absolute'}
+							filter={'blur(200px)'}
+							opacity={0.5}
+							top={400}
+							right={250}
 						/>
 					</Box>
-				</Card>
+					<Flex w={400} flexDirection={'column'} gap={3}>
+						<Heading size={'sm'} fontWeight={500}>
+							Atlanta Name Service
+						</Heading>
+						<Heading size={'lg'}>
+							Atlanta, a decentralized blockchain name service
+							marketplace.
+						</Heading>
+						<Box>
+							<Input
+								placeholder="Search names or addresses"
+								p={8}
+								mt={10}
+								onKeyDown={(e) => checkSpecialChar(e)}
+								onFocus={() => setSearchFocus(true)}
+								onBlur={() => setSearchFocus(false)}
+								onChange={(e) => setSearchQuery(e.target.value)}
+								_focusVisible={{
+									borderColor: 'bg.blue',
+									boxShadow: 'md'
+								}}
+							/>
+
+							<SearchBox
+								hidden={searchFocus && searchQuery !== ''}
+								searchQuery={searchQuery}
+							/>
+						</Box>
+						{/* <Button p={8}>Search</Button> */}
+					</Flex>
+					{/* <Card>
+						<Flex
+							flexDirection={'column'}
+							justify={'center'}
+							align={'center'}
+							gap={2}
+						>
+							<Heading size={'lg'} mb={2}>
+								Atlanta Name Service
+							</Heading>
+							<Text mx={30} textAlign={'center'}>
+								Your identity across web3, one name for all your
+								crypto addresses, and your decentralised website.
+							</Text>
+						</Flex>
+
+						<Box w={'full'} transition={'all .2s ease-in-out'}>
+							<Input
+								placeholder="Search names or addresses"
+								p={8}
+								mt={10}
+								onKeyDown={(e) => checkSpecialChar(e)}
+								onFocus={() => setSearchFocus(true)}
+								onBlur={() => setSearchFocus(false)}
+								onChange={(e) => setSearchQuery(e.target.value)}
+								_focusVisible={{
+									borderColor: 'bg.blue',
+									boxShadow: 'md'
+								}}
+							/>
+
+							<SearchBox
+								hidden={searchFocus && searchQuery !== ''}
+								searchQuery={searchQuery}
+							/>
+						</Box>
+					</Card> */}
+				</Flex>
 			</Flex>
 
 			<Box w={'full'} bg={'bg.card'} pb={100}>

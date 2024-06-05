@@ -5,7 +5,7 @@ export default function Available() {
 	return (
 		<Text
 			size={'sm'}
-			fontWeight={'semibold'}
+			fontWeight={300}
 			color={'bg.success'}
 			textTransform={'uppercase'}
 		>

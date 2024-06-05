@@ -12,9 +12,7 @@ export default function Page(props: ClaimProps) {
 			<BackgroundParticles />
 			<Header />
 
-			<Flex justify={'center'} align={'center'} h={'80vh'}>
-				<Claim params={props.params} />
-			</Flex>
+			<Claim params={props.params} />
 			<Footer />
 		</>
 	);

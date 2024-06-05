@@ -39,7 +39,6 @@ export default function SearchBox(props: SearchBoxProps) {
 			<Box
 				w={'full'}
 				position={'relative'}
-				mt={3}
 				bgColor={'bg.card2'}
 				boxShadow={'lg'}
 			>

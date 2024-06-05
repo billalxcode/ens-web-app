@@ -38,25 +38,16 @@ export default function Claim(props: ClaimProps) {
 	};
 
 	return (
-		<Box>
-			<Flex flexDirection={'column'}>
-				<Flex
-					justify={'center'}
-					align={'center'}
-					flexDirection={'column'}
-				>
-					<Box mb={30}>
-						<Heading mb={2} size={'lg'} textAlign={'center'}>
-							Register Domain Name
-						</Heading>
-						<Text textAlign={'center'}>
-							You are registering available name:{' '}
-							{props.params.username}
-						</Text>
-					</Box>
-					{renderContent()}
-				</Flex>
-			</Flex>
-		</Box>
+		<Flex justify={'center'} align={'center'} flexDirection={'column'} h={'100vh'}>
+			<Box mb={30}>
+				<Heading mb={2} size={'lg'} textAlign={'center'}>
+					Register Domain Name
+				</Heading>
+				<Text textAlign={'center'}>
+					You are registering available name: {props.params.username}
+				</Text>
+			</Box>
+			{renderContent()}
+		</Flex>
 	);
 }

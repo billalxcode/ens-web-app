@@ -12,9 +12,7 @@ export default function page(props: ProfileProps) {
 			<BackgroundParticles />
 			<Header />
 
-			<Flex justify={'center'} align={'center'} h={'80vh'}>
-				<Profile params={props.params} />
-			</Flex>
+			<Profile params={props.params} />
 			<Footer />
 		</>
 	);
