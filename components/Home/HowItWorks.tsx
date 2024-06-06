@@ -16,7 +16,7 @@ export default function HowItWorks() {
 				How it works
 			</Heading>
 
-			<Flex gap={[2, 30]} flexDirection={['column', 'row']}>
+			<Flex gap={[2, 15]} flexDirection={['column', 'row']}>
 				<Box
 					w={['full', 400]}
 					bgColor={'bg.card'}
