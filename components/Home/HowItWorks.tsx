@@ -7,21 +7,22 @@ export default function HowItWorks() {
 			justify={'center'}
 			align={'center'}
 			flexDirection={'column'}
-			mt={200}
+			mt={[150, 200]}
 			mx={2}
 			zIndex={100}
 			borderRadius={5}
 		>
-			<Heading size={'xl'} mb={10}>
+			<Heading size={'lg'} mb={[5, 10]}>
 				How it works
 			</Heading>
 
-			<Flex gap={30} flexDirection={['column', 'row']}>
+			<Flex gap={[2, 30]} flexDirection={['column', 'row']}>
 				<Box
 					w={['full', 400]}
 					bgColor={'bg.card'}
 					p={5}
 					borderRadius={5}
+					boxShadow={'lg'}
 				>
 					<Flex h={70} align={'center'} gap={3}>
 						<Flex

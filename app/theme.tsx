@@ -10,14 +10,15 @@ interface ThemeProps {
 const theme = extendTheme({
 	colors: {
 		primary: {
-			text: '#f8f5f8',
+			text: '#f8f5f8C8',
 			bold: '#5e73e8',
 			secondary: '#36ab61'
 		},
 		bg: {
-			body: '#151515',
-			card: '#1f1f1fCC',
-			card2: '#272727',
+			body: '#111827',
+			body2: '#192339',
+			card: '#202e4b',
+			card2: '#202e4b',
 			error: '#dc3545',
 			success: '#36ab61',
 			secondary: '#CFB6FC',

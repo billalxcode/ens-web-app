@@ -26,16 +26,14 @@ export default function Home() {
 		<>
 			<Flex
 				flexDirection={'column'}
-				justify={'center'}
-				align={'center'}
-				h={['80vh', '100vh']}
+				h={['80vh', '80vh']}
 				mx={[2, 0]}
 			>
 				<Flex
 					mt={70}
 					align={'center'}
 					justify={'center'}
-					gap={[10, 40]}
+					gap={[10, 30]}
 					flexDirection={['column-reverse', 'row']}
 				>
 					<Flex w={['full', 400]} flexDirection={'column'} gap={[0, 2, 3]}>
@@ -90,7 +88,7 @@ export default function Home() {
 				</Flex>
 			</Flex>
 
-			<Box w={'full'} bg={'bg.card'} pb={100}>
+			<Box w={'full'} bg={'bg.body2'} pb={100}>
 				<Flex
 					my={100}
 					flexDirection={'column'}
