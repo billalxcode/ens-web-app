@@ -1,5 +1,5 @@
 'use client';
-import { Engine } from '@tsparticles/engine';
+import { AnimationMode, CollisionMode, DestroyType, DivType, Engine, InteractivityDetect, LimitMode, MoveDirection, OutMode, PixelMode, SingleOrMultiple, StartValueType } from '@tsparticles/engine';
 import Particles, { initParticlesEngine } from '@tsparticles/react';
 import { loadSlim } from '@tsparticles/slim';
 import React, { useEffect, useMemo, useState } from 'react';
@@ -29,7 +29,7 @@ export default function BackgroundParticles() {
 				opacity: 0
 			},
 			backgroundMask: {
-				composite: 'destination-out',
+				composite: 'destination-out' as GlobalCompositeOperation,
 				cover: {
 					color: {
 						value: '#fff'
@@ -49,17 +49,17 @@ export default function BackgroundParticles() {
 			duration: 0,
 			fpsLimit: 120,
 			interactivity: {
-				detectsOn: 'window',
+				detectsOn: 'window' as InteractivityDetect,
 				events: {
 					onClick: {
 						enable: false,
 						mode: 'push'
 					},
 					onDiv: {
-						selectors: {},
+						selectors: [] as SingleOrMultiple<string> | undefined,
 						enable: false,
-						mode: {},
-						type: 'circle'
+						mode: undefined,
+						type: 'circle' as DivType
 					},
 					onHover: {
 						enable: false,
@@ -192,7 +192,7 @@ export default function BackgroundParticles() {
 					},
 					enable: false,
 					maxSpeed: 50,
-					mode: 'bounce',
+					mode: 'bounce' as CollisionMode,
 					overlap: {
 						enable: true,
 						retries: 0
@@ -234,7 +234,7 @@ export default function BackgroundParticles() {
 					close: true,
 					fill: true,
 					options: {},
-					type: {}
+					type: [] as SingleOrMultiple<string> | undefined
 				},
 				move: {
 					angle: {
@@ -252,12 +252,12 @@ export default function BackgroundParticles() {
 					center: {
 						x: 50,
 						y: 50,
-						mode: 'percent',
+						mode: 'percent' as PixelMode,
 						radius: 0
 					},
 					decay: 0,
 					distance: {},
-					direction: 'none',
+					direction: 'none' as MoveDirection,
 					drift: 0,
 					enable: true,
 					gravity: {
@@ -275,7 +275,7 @@ export default function BackgroundParticles() {
 						options: {}
 					},
 					outModes: {
-						default: 'out'
+						default: 'out' as OutMode
 					},
 					random: false,
 					size: false,
@@ -300,7 +300,7 @@ export default function BackgroundParticles() {
 						height: 1080
 					},
 					limit: {
-						mode: 'delete',
+						mode: 'delete' as LimitMode,
 						value: 0
 					},
 					value: 100
@@ -317,9 +317,9 @@ export default function BackgroundParticles() {
 						decay: 0,
 						delay: 0,
 						sync: false,
-						mode: 'auto',
-						startValue: 'random',
-						destroy: 'none'
+						mode: 'auto' as AnimationMode,
+						startValue: 'random' as StartValueType,
+						destroy: 'none' as DestroyType
 					}
 				},
 				reduceDuplicates: false,
@@ -352,9 +352,9 @@ export default function BackgroundParticles() {
 						decay: 0,
 						delay: 0,
 						sync: false,
-						mode: 'auto',
-						startValue: 'random',
-						destroy: 'none'
+						mode: 'auto' as AnimationMode,
+						startValue: 'random' as StartValueType,
+						destroy: 'none' as DestroyType
 					}
 				},
 				stroke: {
@@ -505,7 +505,7 @@ export default function BackgroundParticles() {
 			name: 'Parallax',
 			style: {
 				position: 'absolute',
-				zIndex: -1
+				zIndex: '0'
 			},
 			motion: {
 				disable: false,
