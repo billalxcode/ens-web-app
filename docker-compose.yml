@@ -11,7 +11,7 @@ services:
       - 443:443
     volumes:
       - ./proxy/templates:/etc/nginx/templates
-      - ./proxy/cert:/etc/certs/frontend
+      - ./proxy/cert:/etc/certs
     network_mode: bridge
     extra_hosts:
       - "host.docker.internal:host-gateway"
