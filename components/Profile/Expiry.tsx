@@ -1,13 +1,14 @@
 import { Flex, Heading, Text } from '@chakra-ui/react';
 import React from 'react';
 import ButtonClipboard from '../ButtonClipboard';
+import moment from 'moment';
 
-export default function OwnerAddress(props: { address: string }) {
-	if (props.address) {
+export default function Expiry(props: { date: Date | undefined }) {
+	if (props.date) {
 		return (
 			<Flex flexDirection={'column'} gap={2}>
 				<Heading size={'sm'} color={'primary.text'}>
-					Ownner
+					Expired At
 				</Heading>
 				<Flex
 					bgColor={'bg.card2'}
@@ -17,11 +18,10 @@ export default function OwnerAddress(props: { address: string }) {
 					align={'center'}
 				>
 					<Text fontSize={[13, 15]}>
-						{`${props.address.substring(0, 14)}...${props.address.substring(props.address.length - 14, props.address.length)}` ||
-							''}
+						{moment(props.date).format('LL')}
 					</Text>
 					<ButtonClipboard
-						value={props.address || ''}
+						value={moment(props.date).format('LL') || ''}
 						size={'sm'}
 						timeout={1500}
 					/>

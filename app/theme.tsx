@@ -18,7 +18,7 @@ const theme = extendTheme({
 			body: '#111827',
 			body2: '#192339',
 			card: '#202e4b',
-			card2: '#202e4b',
+			card2: '#28395c',
 			error: '#dc3545',
 			success: '#36ab61',
 			secondary: '#CFB6FC',
