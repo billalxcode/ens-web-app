@@ -52,8 +52,8 @@ const theme = extendTheme({
 
 export default function Theme(props: ThemeProps) {
 	return (
-		<Web3Modal>
-			<ChakraProvider theme={theme}>{props.children}</ChakraProvider>
-		</Web3Modal>
+		<ChakraProvider theme={theme}>
+			<Web3Modal>{props.children}</Web3Modal>
+		</ChakraProvider>
 	);
 }

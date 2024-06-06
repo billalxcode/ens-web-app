@@ -15,8 +15,12 @@ export default function OwnerAddress(props: { address: string }) {
 					borderRadius={5}
 					justify={'space-between'}
 					align={'center'}
+					gap={10}
 				>
-					<Text>{props.address}</Text>
+					<Text fontSize={[13, 15]}>
+						{`${props.address.substring(0, 14)}...${props.address.substring(props.address.length - 14, props.address.length)}` ||
+							''}
+					</Text>
 					<ButtonClipboard
 						value={props.address}
 						size={'sm'}

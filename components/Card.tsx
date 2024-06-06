@@ -8,7 +8,7 @@ export default function Card(props: NodeProps) {
 			p={5}
 			bgColor={'bg.card'}
 			boxShadow={'sm'}
-			w={600}
+			w={['full', 600]}
 			borderRadius={5}
 			transition={'all .2s ease-in-out'}
 			zIndex={2}

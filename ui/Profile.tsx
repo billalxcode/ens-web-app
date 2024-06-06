@@ -61,17 +61,22 @@ export default function Profile(props: ProfileProps) {
 	});
 
 	return (
-		<Flex flexDirection={'column'} justify={'center'} align={'center'} h={"100vh"}>
+		<Flex
+			flexDirection={'column'}
+			justify={'center'}
+			align={'center'}
+			h={'100vh'}
+		>
 			<Box mb={30}>
 				<Card>
 					<Flex justify={'center'} align={'center'} gap={5}>
-						<Image src={ensAvatar} w={50} />
+						<Image src={ensAvatar} w={[45, 50]} />
 						<Flex flexDirection={'column'}>
-							<Heading size={'md'}>
+							<Heading size={['sm', 'md']}>
 								{props.params.username}
 							</Heading>
 							<Text
-								fontSize={10}
+								fontSize={[8, 10]}
 								color={'primary.secondary'}
 								fontWeight={900}
 							>
@@ -94,7 +99,7 @@ export default function Profile(props: ProfileProps) {
 								justify={'space-between'}
 								align={'center'}
 							>
-								<Text>
+								<Text fontSize={[13, 15]}>
 									{moment(expiryDate?.expiry.date).format(
 										'LL'
 									)}
@@ -105,7 +110,7 @@ export default function Profile(props: ProfileProps) {
 					<Divider opacity={0.5} my={3} />
 					<Flex justify={'space-between'}>
 						<Button
-							p={5}
+							p={[3, 5]}
 							transition={'all .5s ease-in-out'}
 							bgGradient={'linear(to-l, #8aa9f2, #9a76ff)'}
 							bgSize={'100 100'}
@@ -119,7 +124,7 @@ export default function Profile(props: ProfileProps) {
 							Edit Profile
 						</Button>
 						<Button
-							p={5}
+							p={[3, 5]}
 							transition={'all .5s ease-in-out'}
 							bgGradient={'linear(to-l, #8aa9f2, #9a76ff)'}
 							bgSize={'100 100'}

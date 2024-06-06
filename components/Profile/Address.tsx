@@ -16,7 +16,10 @@ export default function Address(props: { address: string }) {
 					justify={'space-between'}
 					align={'center'}
 				>
-					<Text>{props.address || ''}</Text>
+					<Text fontSize={[13, 15]}>
+						{`${props.address.substring(0, 14)}...${props.address.substring(props.address.length - 14, props.address.length)}` ||
+							''}
+					</Text>
 					<ButtonClipboard
 						value={props.address || ''}
 						size={'sm'}

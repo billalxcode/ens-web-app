@@ -4,36 +4,36 @@ import React from 'react';
 
 export default function Header() {
 	return (
-		<Box
+		<Flex
+			justify={'space-between'}
+			p={3}
+			// mx={5}
+			align={'center'}
 			bgColor={'bg.body'}
 			boxShadow={'md'}
-			position={'absolute'}
+			// position={'absolute'}
 			zIndex={100}
-			w={"full"}
+			w={'full'}
 		>
-			<Flex justify={'space-between'} p={3} mx={5} align={"center"}>
-				<Flex align={'center'}>
-					<Image
-						src="/images/Atlanta.png"
-						alt="Atlanta Logo"
-						width={20}
-					/>
-					<Link href="/" textDecoration={'none'}>
-						<Heading
-							color={'primary.text'}
-							textDecoration={'none'}
-							size={'md'}
-							mx={3}
-							opacity={0.8}
-						>
-							Atlanta Domains
-						</Heading>
-					</Link>
-				</Flex>
-				<Box>
-					<w3m-button />
-				</Box>
+			<Flex align={'center'}>
+				<Image
+					src="/images/Atlanta.png"
+					alt="Atlanta Logo"
+					width={[12, 10, 20]}
+				/>
+				<Link href="/" textDecoration={'none'}>
+					<Heading
+						color={'primary.text'}
+						textDecoration={'none'}
+						size={['sm', 'sm', 'md']}
+						mx={[0, 2, 3]}
+						opacity={0.8}
+					>
+						Atlanta Domains
+					</Heading>
+				</Link>
 			</Flex>
-		</Box>
+			<w3m-button />
+		</Flex>
 	);
 }
