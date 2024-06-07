@@ -190,6 +190,7 @@ export default function FormCommit(props: FormCommitProps) {
 					);
 				}
 			});
+			props.setStep('registrationSuccess');
 		} catch (e) {
 			if (e instanceof TransactionExecutionError) {
 				toast({

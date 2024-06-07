@@ -8,7 +8,7 @@ import { useWeb3ModalAccount } from '@web3modal/ethers/react';
 import RegistrationSuccess from '@/components/Claim/RegistrationSuccess';
 
 export default function Claim(props: ClaimProps) {
-	const [step, setStep] = useState('registrationSuccess');
+	const [step, setStep] = useState('registration');
 	const [durationInYear, setDurationInYear] = useState(1);
 	const [isPrimaryName, setIsPrimaryName] = useState(true);
 
