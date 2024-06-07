@@ -94,6 +94,7 @@ export default function Home() {
 					flexDirection={'column'}
 					justify={'center'}
 					align={'center'}
+					boxShadow={'xl'}
 				>
 					<Box
 						w={['full', 300, 900]}

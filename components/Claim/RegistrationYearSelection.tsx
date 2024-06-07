@@ -27,7 +27,16 @@ export default function RegistrationYearSelection(
 	return (
 		<Box>
 			<Flex bgColor={'bg.card2'} p={3} borderRadius={10} gap={2}>
-				<Button onClick={() => handleDecreaseButton()}>-</Button>
+				<Button
+					onClick={() => handleDecreaseButton()}
+					transition={'all 0.5s ease-in-out'}
+					bgColor={'bg.button.secondary'}
+					_hover={{
+						bgColor: 'bg.button.hover.secondary'
+					}}
+				>
+					-
+				</Button>
 				<Input
 					size={'lg'}
 					fontWeight={'bold'}
@@ -36,7 +45,16 @@ export default function RegistrationYearSelection(
 					value={value}
 					readOnly
 				/>
-				<Button onClick={() => handleIncreaseButton()}>+</Button>
+				<Button
+					onClick={() => handleIncreaseButton()}
+					transition={'all 0.5s ease-in-out'}
+					bgColor={'bg.button.secondary'}
+					_hover={{
+						bgColor: 'bg.button.hover.secondary'
+					}}
+				>
+					+
+				</Button>
 			</Flex>
 		</Box>
 	);

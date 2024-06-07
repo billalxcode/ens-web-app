@@ -57,7 +57,14 @@ export default function FormRegistration(props: FormRegistrationProps) {
 			<Flex flexDirection={'column'} gap={3}>
 				<Flex justify={'space-between'} flexDirection={'row'}>
 					<Text>Registration Priod</Text>
-					<Text>{props.durationInYear} Year</Text>
+					<Skeleton
+						isLoaded={!isEstimateRegistration}
+						borderRadius={5}
+						startColor={'bg.skeletonStart'}
+						endColor={'bg.skeletonEnd'}
+					>
+						<Text>{props.durationInYear} Year</Text>
+					</Skeleton>
 				</Flex>
 				<Flex justify={'space-between'} flexDirection={'row'}>
 					<Text>Registration Fee</Text>
@@ -96,18 +103,25 @@ export default function FormRegistration(props: FormRegistrationProps) {
 
 				<Flex justify={'space-between'} flexDirection={'row'}>
 					<Text>Set as primary</Text>
-					<Switch
-						css={css`
-							.chakra-switch__thumb:checked
-								+ .chakra-switch__track {
-								background-color: #8aa9f2;
+					<Skeleton
+						isLoaded={!isEstimateRegistration}
+						borderRadius={5}
+						startColor={'bg.skeletonStart'}
+						endColor={'bg.skeletonEnd'}
+					>
+						<Switch
+							css={css`
+								.chakra-switch__thumb:checked
+									+ .chakra-switch__track {
+									background-color: #8aa9f2;
+								}
+							`}
+							onChange={(e) =>
+								props.setIsPrimaryName(e.target.checked)
 							}
-						`}
-						onChange={(e) =>
-							props.setIsPrimaryName(e.target.checked)
-						}
-						isChecked={props.isPrimaryName}
-					/>
+							isChecked={props.isPrimaryName}
+						/>
+					</Skeleton>
 				</Flex>
 			</Flex>
 

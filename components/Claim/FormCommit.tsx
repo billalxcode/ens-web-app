@@ -53,7 +53,7 @@ export default function FormCommit(props: FormCommitProps) {
 			// 	'0x8FADE66B79cC9f707aB26799354482EB93a5B7dD' as `0x${string}`,
 			secret: params.secret as `0x${string}`
 		});
-		const paymentData = createPaymentData(registrationParams)
+		const paymentData = createPaymentData(registrationParams);
 		const hash = await wallet.sendTransaction({
 			to: '0x3A9580b04Bf1e81c242Fb4b7F2e79e6794bfE8fE' as Address,
 			data: encodeFunctionData({
@@ -63,11 +63,11 @@ export default function FormCommit(props: FormCommitProps) {
 			}),
 			account: (await wallet.getAddresses())[0],
 			gas: BigInt(333508),
-			chain: wallet.chain,	
+			chain: wallet.chain,
 			value: paymentPrice
 		});
-		await client.waitForTransactionReceipt({ hash })
-		return hash
+		await client.waitForTransactionReceipt({ hash });
+		return hash;
 	};
 
 	const handleCommitClick = async () => {
@@ -166,7 +166,7 @@ export default function FormCommit(props: FormCommitProps) {
 				props.duration
 			);
 			const hash = await handlePayment(wallet, params, prices[1]);
-			
+
 			toast({
 				description: 'Successfully to register domain, check ',
 				position: 'top-right',
@@ -224,7 +224,7 @@ export default function FormCommit(props: FormCommitProps) {
 				color={'primary.text'}
 				opacity={0.7}
 			>
-				Commit an ENS domain name to secure it before registration.
+				Commit an domain name to secure it before registration.
 			</Text>
 			<Divider opacity={0.5} my={3} />
 
@@ -235,6 +235,12 @@ export default function FormCommit(props: FormCommitProps) {
 					w={'full'}
 					p={7}
 					transition={'all .5s ease-in-out'}
+					color={'primary.text'}
+					bgColor={'bg.button.secondary'}
+					_hover={{
+						bgColor: 'bg.button.hover.secondary',
+						transform: 'translateY(-5px)'
+					}}
 					onClick={() => props.setStep('registration')}
 				>
 					Back
@@ -244,6 +250,7 @@ export default function FormCommit(props: FormCommitProps) {
 					p={7}
 					bgGradient={'linear(to-l, #8aa9f2, #9a76ff)'}
 					transition={'all .5s ease-in-out'}
+					color={'primary.text'}
 					_hover={{
 						transform: 'translateY(-5px)'
 					}}

@@ -24,7 +24,7 @@ const theme = extendTheme({
 			body: '#111827',
 			body2: '#192339',
 			card: '#202e4b',
-			card2: '#28395c',
+			card2: '#202d49',
 			error: '#dc3545',
 			success: '#36ab61',
 			secondary: '#CFB6FC',
@@ -32,18 +32,21 @@ const theme = extendTheme({
 			skeletonEnd: '#494949',
 			button: {
 				primary: '#5e83ff',
+				secondary: '#3d4c6c',
 				hover: {
-					primary: '#605ee8'
+					primary: '#605ee8',
+					secondary: '#52607c'
 				},
 				active: {
-					primary: '#5e8ae8'
+					primary: '#5e8ae8',
+					secondary: '#243352'
 				},
 				disabled: {
 					primary: '#6f96ea'
 				}
 			},
 			hover: {
-				card2: '#2a2a2a'
+				card2: '#182237'
 			}
 		}
 	},
