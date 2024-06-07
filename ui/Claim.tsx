@@ -5,9 +5,10 @@ import ClaimProps from '@/interface/props/ClaimProps';
 import FormRegistration from '@/components/Claim/FormRegistration';
 import FormCommit from '@/components/Claim/FormCommit';
 import { useWeb3ModalAccount } from '@web3modal/ethers/react';
+import RegistrationSuccess from '@/components/Claim/RegistrationSuccess';
 
 export default function Claim(props: ClaimProps) {
-	const [step, setStep] = useState('registration');
+	const [step, setStep] = useState('registrationSuccess');
 	const [durationInYear, setDurationInYear] = useState(1);
 	const [isPrimaryName, setIsPrimaryName] = useState(true);
 
@@ -34,11 +35,25 @@ export default function Claim(props: ClaimProps) {
 					setStep={(newStep) => setStep(newStep)}
 				/>
 			);
+		} else if (step == 'registrationSuccess') {
+			return (
+				<RegistrationSuccess
+					name={props.params.username}
+					owner={ownerAddress || ''}
+					duration={durationInYear}
+					setStep={(newStep) => setStep(newStep)}
+				/>
+			);
 		}
 	};
 
 	return (
-		<Flex justify={'center'} align={'center'} flexDirection={'column'} h={'100vh'}>
+		<Flex
+			justify={'center'}
+			align={'center'}
+			flexDirection={'column'}
+			h={'100vh'}
+		>
 			<Box mb={30}>
 				<Heading mb={2} size={'lg'} textAlign={'center'}>
 					Register Domain Name

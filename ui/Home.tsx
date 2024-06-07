@@ -57,6 +57,10 @@ export default function Home() {
 								onFocus={() => setSearchFocus(true)}
 								onBlur={() => setSearchFocus(false)}
 								onChange={(e) => setSearchQuery(e.target.value)}
+								borderColor={'border.input'}
+								_hover={{
+									borderColor: 'border.hover.input'
+								}}
 								_focusVisible={{
 									borderColor: 'bg.blue',
 									boxShadow: 'md'

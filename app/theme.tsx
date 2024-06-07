@@ -48,6 +48,12 @@ const theme = extendTheme({
 			hover: {
 				card2: '#182237'
 			}
+		},
+		border: {
+			input: '#3A3E48',
+			hover: {
+				input: '#494e5b'
+			}
 		}
 	},
 	styles: {
