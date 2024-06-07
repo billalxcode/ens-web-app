@@ -7,7 +7,6 @@ export default function Header() {
 		<Flex
 			justify={'space-between'}
 			p={3}
-			// mx={5}
 			align={'center'}
 			bgColor={'bg.body'}
 			boxShadow={'md'}
