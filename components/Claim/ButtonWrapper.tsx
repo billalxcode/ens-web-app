@@ -40,6 +40,7 @@ export default function ButtonWrapper(props: ButtonWrapperProps) {
 					w={'full'}
 					p={7}
 					bgColor={'bg.button.primary'}
+					color={'primary.text'}
 					transition={'all .5s ease-in-out'}
 					_hover={{
 						bgColor: 'bg.button.hover.primary'
@@ -61,6 +62,7 @@ export default function ButtonWrapper(props: ButtonWrapperProps) {
 						bgColor={'bg.button.primary'}
 						transition={'all .5s ease-in-out'}
 						cursor={'default'}
+						color={'primary.text'}
 						_hover={{
 							bgColor: 'bg.button.disabled.primary'
 						}}
@@ -80,6 +82,7 @@ export default function ButtonWrapper(props: ButtonWrapperProps) {
 						transition={'all .5s ease-in-out'}
 						bgGradient={'linear(to-l, #8aa9f2, #9a76ff)'}
 						bgSize={'100 100'}
+						color={'primary.text'}
 						_hover={{
 							transform: 'translateY(-5px)'
 						}}

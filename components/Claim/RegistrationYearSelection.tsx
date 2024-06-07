@@ -31,6 +31,7 @@ export default function RegistrationYearSelection(
 					onClick={() => handleDecreaseButton()}
 					transition={'all 0.5s ease-in-out'}
 					bgColor={'bg.button.secondary'}
+					color={'primary.text'}
 					_hover={{
 						bgColor: 'bg.button.hover.secondary'
 					}}
@@ -49,6 +50,7 @@ export default function RegistrationYearSelection(
 					onClick={() => handleIncreaseButton()}
 					transition={'all 0.5s ease-in-out'}
 					bgColor={'bg.button.secondary'}
+					color={'primary.text'}
 					_hover={{
 						bgColor: 'bg.button.hover.secondary'
 					}}
