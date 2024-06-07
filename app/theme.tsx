@@ -7,7 +7,13 @@ interface ThemeProps {
 	children: React.ReactNode;
 }
 
+const config = {
+	initialColorMode: 'dark',
+	useSystemColorMode: false
+};
+
 const theme = extendTheme({
+	config,
 	colors: {
 		primary: {
 			text: '#f8f5f8C8',
