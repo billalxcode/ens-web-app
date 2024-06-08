@@ -113,6 +113,7 @@ export default function Profile(props: ProfileProps) {
 								bgGradient={'linear(to-l, #8aa9f2, #9a76ff)'}
 								bgSize={'100 100'}
 								fontWeight={600}
+								color={'primary.text'}
 								_hover={{
 									transform: 'translateY(-5px)'
 								}}
@@ -127,6 +128,7 @@ export default function Profile(props: ProfileProps) {
 								transition={'all .5s ease-in-out'}
 								bgGradient={'linear(to-l, #8aa9f2, #9a76ff)'}
 								bgSize={'100 100'}
+								color={'primary.text'}
 								_hover={{
 									transform: 'translateY(-5px)'
 								}}

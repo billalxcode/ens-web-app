@@ -15,7 +15,16 @@ export default function ButtonClipboard(props: ButtonClipboardProps) {
 	};
 
 	return (
-		<Button {...props} onClick={() => handleClick()}>
+		<Button
+			{...props}
+			onClick={() => handleClick()}
+			transition={'all 0.5s ease-in-out'}
+			bgColor={'bg.button.secondary'}
+			color={'primary.text'}
+			_hover={{
+				bgColor: 'bg.button.hover.secondary'
+			}}
+		>
 			<FontAwesomeIcon icon={copied ? faCheck : faClipboard} />
 		</Button>
 	);
