@@ -16,6 +16,7 @@ export default function Expiry(props: { date: Date | undefined }) {
 					borderRadius={5}
 					justify={'space-between'}
 					align={'center'}
+					boxShadow={'md'}
 				>
 					<Text fontSize={[13, 15]}>
 						{moment(props.date).format('LL')}

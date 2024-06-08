@@ -15,6 +15,7 @@ export default function OwnerAddress(props: { address: string }) {
 					borderRadius={5}
 					justify={'space-between'}
 					align={'center'}
+					boxShadow={'md'}
 				>
 					<Text fontSize={[13, 15]}>
 						{`${props.address.substring(0, 14)}...${props.address.substring(props.address.length - 14, props.address.length)}` ||
