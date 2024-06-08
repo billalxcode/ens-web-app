@@ -5,20 +5,20 @@ import NodeProps from '../interface/props/NodeProps';
 
 const projectId = '722464b71db715c225fa67d639163064';
 
-// const mainnet = {
-//     chainId: 1,
-//     name: 'Ethereum',
-//     currency: 'ETH',
-//     explorerUrl: 'https://etherscan.io',
-//     rpcUrl: 'https://cloudflare-eth.com'
-// }
-const sepolia = {
-	chainId: 11155111,
-	name: 'Sepolia',
-	explorerUrl: 'https://sepolia.etherscan.io',
-	rpcUrl: 'https://rpc.sepolia.org',
-	currency: 'ETH'
-};
+const mainnet = {
+    chainId: 1,
+    name: 'Ethereum',
+    currency: 'ETH',
+    explorerUrl: 'https://etherscan.io',
+    rpcUrl: 'https://cloudflare-eth.com'
+}
+// const sepolia = {
+// 	chainId: 11155111,
+// 	name: 'Sepolia',
+// 	explorerUrl: 'https://sepolia.etherscan.io',
+// 	rpcUrl: 'https://rpc.sepolia.org',
+// 	currency: 'ETH'
+// };
 
 // const devnet = {
 // 	chainId: 31337,
@@ -46,7 +46,7 @@ const ethersConfig = defaultConfig({
 
 createWeb3Modal({
 	ethersConfig,
-	chains: [sepolia],
+	chains: [mainnet],
 	projectId,
 	enableAnalytics: true,
 	enableOnramp: true

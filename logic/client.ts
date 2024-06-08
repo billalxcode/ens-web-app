@@ -5,15 +5,17 @@ import {
 	custom,
 	http
 } from 'viem';
-import { sepolia } from 'viem/chains';
+// import { sepolia } from 'viem/chains';
+import { mainnet } from 'viem/chains';
+
 const client = createPublicClient({
-	chain: addEnsContracts(sepolia),
+	chain: addEnsContracts(mainnet),
 	transport: http()
 });
 
 const createWalletClient = (provider: any) => {
 	const clientWallet = walletCLient({
-		chain: addEnsContracts(sepolia),
+		chain: addEnsContracts(mainnet),
 		transport: custom(provider as any)
 	});
 	return clientWallet;

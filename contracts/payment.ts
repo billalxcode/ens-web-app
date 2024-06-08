@@ -1,3 +1,5 @@
+const PaymentAddress = '0xe2f604de2b2bfcd933c0b3b7613d5732447f0881';
+
 const PaymentAbi = [
 	{
 		inputs: [
@@ -395,4 +397,4 @@ const PaymentAbi = [
 	}
 ];
 
-export { PaymentAbi };
+export { PaymentAbi, PaymentAddress };
