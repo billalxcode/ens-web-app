@@ -27,12 +27,10 @@ import {
 	WalletClient,
 	encodeFunctionData
 } from 'viem';
-import ToasterSuccess from '../Toaster/ToasterSuccess';
 import ToasterLoading from '../Toaster/ToasterLoading';
 import { getPaymentPrices } from '@/logic/prices';
-import { sendTransaction } from 'viem/actions';
-import { createPaymentData } from '@/logic/payment';
 import { PaymentAbi } from '@/contracts/payment';
+import { sendPayment } from '@/logic/payment';
 
 export default function FormCommit(props: FormCommitProps) {
 	const toast = useToast();
@@ -49,24 +47,14 @@ export default function FormCommit(props: FormCommitProps) {
 			name: params.name,
 			owner: params.owner as `0x${string}`,
 			duration: params.duration,
-			// resolverAddress:
-			// 	'0x8FADE66B79cC9f707aB26799354482EB93a5B7dD' as `0x${string}`,
 			secret: params.secret as `0x${string}`
 		});
-		const paymentData = createPaymentData(registrationParams);
-		const hash = await wallet.sendTransaction({
-			to: '0x3A9580b04Bf1e81c242Fb4b7F2e79e6794bfE8fE' as Address,
-			data: encodeFunctionData({
-				abi: PaymentAbi,
-				functionName: 'registerName',
-				args: registrationParams
-			}),
-			account: (await wallet.getAddresses())[0],
-			gas: BigInt(333508),
-			chain: wallet.chain,
-			value: paymentPrice
-		});
-		await client.waitForTransactionReceipt({ hash });
+		const hash = await sendPayment({
+			wallet: wallet,
+			client: client,
+			registrationParams: registrationParams,
+			paymentPrice: paymentPrice
+		})
 		return hash;
 	};
 
