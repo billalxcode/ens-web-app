@@ -11,6 +11,7 @@ import React, { KeyboardEvent, useState } from 'react';
 import Card from '../components/Card';
 import SearchBox from '../components/Home/SearchBox';
 import HowItWorks from '../components/Home/HowItWorks';
+import { ensNormalize } from 'ethers';
 
 export default function Home() {
 	const [searchFocus, setSearchFocus] = useState<boolean>(false);
@@ -21,6 +22,11 @@ export default function Home() {
 			event.preventDefault();
 		}
 	};
+
+	const handleInputChange = (text: string) => {
+		const textNormalized = ensNormalize(text)
+		setSearchQuery(textNormalized)
+	}
 
 	return (
 		<>
@@ -56,7 +62,7 @@ export default function Home() {
 								onKeyDown={(e) => checkSpecialChar(e)}
 								onFocus={() => setSearchFocus(true)}
 								onBlur={() => setSearchFocus(false)}
-								onChange={(e) => setSearchQuery(e.target.value)}
+								onChange={(e) => handleInputChange(e.target.value)}
 								borderColor={'border.input'}
 								_hover={{
 									borderColor: 'border.hover.input'

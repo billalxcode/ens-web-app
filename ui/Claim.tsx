@@ -1,11 +1,13 @@
 'use client';
 import { Box, Flex, Heading, Text } from '@chakra-ui/react';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ClaimProps from '@/interface/props/ClaimProps';
 import FormRegistration from '@/components/Claim/FormRegistration';
 import FormCommit from '@/components/Claim/FormCommit';
 import { useWeb3ModalAccount } from '@web3modal/ethers/react';
 import RegistrationSuccess from '@/components/Claim/RegistrationSuccess';
+import isNameAvailable from '@/logic/available';
+import { ensNormalize } from 'ethers';
 
 export default function Claim(props: ClaimProps) {
 	const [step, setStep] = useState('registration');
@@ -13,6 +15,19 @@ export default function Claim(props: ClaimProps) {
 	const [isPrimaryName, setIsPrimaryName] = useState(true);
 
 	const { address: ownerAddress } = useWeb3ModalAccount();
+
+	useEffect(() => {
+		(async() => {
+			const available = await isNameAvailable(
+				ensNormalize(props.params.username)
+			);
+			if (!available) {
+				location.replace(
+					`/profile/${ensNormalize(props.params.username)}`
+				);
+			}
+		})()
+	}, [])
 
 	const renderContent = () => {
 		if (step == 'registration') {
@@ -59,7 +74,8 @@ export default function Claim(props: ClaimProps) {
 					Register Domain Name
 				</Heading>
 				<Text textAlign={'center'}>
-					You are registering available name: {props.params.username}
+					You are registering available name:
+					{ensNormalize(props.params.username)}
 				</Text>
 			</Box>
 			{renderContent()}

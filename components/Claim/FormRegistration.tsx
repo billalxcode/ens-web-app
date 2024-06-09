@@ -5,7 +5,7 @@ import RegistrationYearSelection from './RegistrationYearSelection';
 import { Divider, Flex, Skeleton, Switch, Text } from '@chakra-ui/react';
 import ButtonWrapper from './ButtonWrapper';
 import estimateRegistration from '@/logic/estimateRegistration';
-import { ethers } from 'ethers';
+import { ensNormalize, ethers } from 'ethers';
 import client from '@/logic/client';
 import estimatedRegistrationStates from '@/interface/states/estimatedRegistration';
 import { getGasPrice } from 'viem/actions';
@@ -28,7 +28,7 @@ export default function FormRegistration(props: FormRegistrationProps) {
 			if (isEstimateRegistration) {
 				const gasPrice = await getGasPrice(client);
 				const estimatedRegistrationData = await estimateRegistration(
-					props.params.username,
+					ensNormalize(props.params.username),
 					props.durationInYear
 				);
 				setGasPrices(gasPrice);
