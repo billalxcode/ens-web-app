@@ -12,13 +12,15 @@ const mainnet = {
     explorerUrl: 'https://etherscan.io',
     rpcUrl: 'https://cloudflare-eth.com'
 }
-// const sepolia = {
-// 	chainId: 11155111,
-// 	name: 'Sepolia',
-// 	explorerUrl: 'https://sepolia.etherscan.io',
-// 	rpcUrl: 'https://rpc.sepolia.org',
-// 	currency: 'ETH'
-// };
+const sepolia = {
+	chainId: 11155111,
+	name: 'Sepolia',
+	explorerUrl: 'https://sepolia.etherscan.io',
+	rpcUrl: 'https://rpc.sepolia.org',
+	currency: 'ETH'
+};
+
+let chain = process.env.NEXT_PUBLIC_APP_ENV == 'prod' ? mainnet : sepolia;
 
 // const devnet = {
 // 	chainId: 31337,
@@ -40,13 +42,13 @@ const ethersConfig = defaultConfig({
 	enableEIP6963: true,
 	enableInjected: true,
 	enableCoinbase: true,
-	rpcUrl: 'http://localhost:8545',
+	rpcUrl: chain.rpcUrl,
 	defaultChainId: 31337
 });
 
 createWeb3Modal({
 	ethersConfig,
-	chains: [mainnet],
+	chains: [chain],
 	projectId,
 	enableAnalytics: true,
 	enableOnramp: true

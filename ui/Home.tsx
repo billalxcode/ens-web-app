@@ -1,3 +1,4 @@
+'use client';
 import {
 	Box,
 	Button,
@@ -7,7 +8,7 @@ import {
 	Input,
 	Text
 } from '@chakra-ui/react';
-import React, { KeyboardEvent, useState } from 'react';
+import React, { KeyboardEvent, useEffect, useState } from 'react';
 import Card from '../components/Card';
 import SearchBox from '../components/Home/SearchBox';
 import HowItWorks from '../components/Home/HowItWorks';
@@ -17,6 +18,9 @@ export default function Home() {
 	const [searchFocus, setSearchFocus] = useState<boolean>(false);
 	const [searchQuery, setSearchQuery] = useState<string>('');
 
+	useEffect(() => {
+		
+	}, []);
 	const checkSpecialChar = (event: KeyboardEvent<HTMLInputElement>) => {
 		if (!/[0-9a-z]/i.test(event.key)) {
 			event.preventDefault();
@@ -24,17 +28,13 @@ export default function Home() {
 	};
 
 	const handleInputChange = (text: string) => {
-		const textNormalized = ensNormalize(text)
-		setSearchQuery(textNormalized)
-	}
+		const textNormalized = ensNormalize(text);
+		setSearchQuery(textNormalized);
+	};
 
 	return (
 		<>
-			<Flex
-				flexDirection={'column'}
-				h={['80vh', '80vh']}
-				mx={[2, 0]}
-			>
+			<Flex flexDirection={'column'} h={['80vh', '80vh']} mx={[2, 0]}>
 				<Flex
 					mt={70}
 					align={'center'}
@@ -42,7 +42,11 @@ export default function Home() {
 					gap={[10, 30]}
 					flexDirection={['column-reverse', 'row']}
 				>
-					<Flex w={['full', 400]} flexDirection={'column'} gap={[0, 2, 3]}>
+					<Flex
+						w={['full', 400]}
+						flexDirection={'column'}
+						gap={[0, 2, 3]}
+					>
 						<Heading
 							size={'sm'}
 							fontWeight={500}
@@ -62,7 +66,9 @@ export default function Home() {
 								onKeyDown={(e) => checkSpecialChar(e)}
 								onFocus={() => setSearchFocus(true)}
 								onBlur={() => setSearchFocus(false)}
-								onChange={(e) => handleInputChange(e.target.value)}
+								onChange={(e) =>
+									handleInputChange(e.target.value)
+								}
 								borderColor={'border.input'}
 								_hover={{
 									borderColor: 'border.hover.input'

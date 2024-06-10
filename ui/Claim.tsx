@@ -1,6 +1,20 @@
 'use client';
-import { Box, Flex, Heading, Text } from '@chakra-ui/react';
-import React, { useEffect, useState } from 'react';
+import {
+	Box,
+	Flex,
+	Heading,
+	Step,
+	StepDescription,
+	StepIcon,
+	StepIndicator,
+	StepNumber,
+	StepStatus,
+	StepTitle,
+	Stepper,
+	Text,
+	useSteps
+} from '@chakra-ui/react';
+import React, { useEffect, useMemo, useState } from 'react';
 import ClaimProps from '@/interface/props/ClaimProps';
 import FormRegistration from '@/components/Claim/FormRegistration';
 import FormCommit from '@/components/Claim/FormCommit';
@@ -8,6 +22,7 @@ import { useWeb3ModalAccount } from '@web3modal/ethers/react';
 import RegistrationSuccess from '@/components/Claim/RegistrationSuccess';
 import isNameAvailable from '@/logic/available';
 import { ensNormalize } from 'ethers';
+import FormPrimaryName from '@/components/Claim/FormPrimaryName';
 
 export default function Claim(props: ClaimProps) {
 	const [step, setStep] = useState('registration');
@@ -17,7 +32,7 @@ export default function Claim(props: ClaimProps) {
 	const { address: ownerAddress } = useWeb3ModalAccount();
 
 	useEffect(() => {
-		(async() => {
+		(async () => {
 			const available = await isNameAvailable(
 				ensNormalize(props.params.username)
 			);
@@ -26,8 +41,8 @@ export default function Claim(props: ClaimProps) {
 					`/profile/${ensNormalize(props.params.username)}`
 				);
 			}
-		})()
-	}, [])
+		})();
+	}, []);
 
 	const renderContent = () => {
 		if (step == 'registration') {
@@ -45,6 +60,7 @@ export default function Claim(props: ClaimProps) {
 			return (
 				<FormCommit
 					name={props.params.username}
+					isPrimaryName={isPrimaryName}
 					owner={ownerAddress || ''}
 					duration={durationInYear}
 					setStep={(newStep) => setStep(newStep)}
@@ -59,6 +75,14 @@ export default function Claim(props: ClaimProps) {
 					setStep={(newStep) => setStep(newStep)}
 				/>
 			);
+		} else if (step == 'primaryName') {
+			return (
+				<FormPrimaryName
+					name={props.params.username}
+					owner={ownerAddress || ''}
+					setStep={(newStep) => setStep(newStep)}
+				/>
+			);
 		}
 	};
 
@@ -69,7 +93,7 @@ export default function Claim(props: ClaimProps) {
 			flexDirection={'column'}
 			h={'100vh'}
 		>
-			<Box mb={30}>
+			<Box mb={30} w={['full', 600]}>
 				<Heading mb={2} size={'lg'} textAlign={'center'}>
 					Register Domain Name
 				</Heading>
