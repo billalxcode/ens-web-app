@@ -1,4 +1,4 @@
-const PaymentAddress = '0xe2f604de2b2bfcd933c0b3b7613d5732447f0881';
+const PaymentAddress = process.env.NEXT_PUBLIC_APP_ENV ? '0xe2f604de2b2bfcd933c0b3b7613d5732447f0881' : '0x3A9580b04Bf1e81c242Fb4b7F2e79e6794bfE8fE';
 
 const PaymentAbi = [
 	{
