@@ -20,7 +20,20 @@ services:
     image: atlanta-domains
     build: 
       context: .
+    env_file:
+      - .env
     extra_hosts:
       - "host.docker.internal:host-gateway"
     ports:
       - 3000:3000
+  frontend-sepolia:
+    container_name: atlanta-domains-sepolia
+    image: atlanta-domains
+    build:
+      context: .
+    env_file:
+      - .env
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    ports:
+      - 3000:3001
