@@ -369,11 +369,9 @@ export default function FormCommit(props: FormCommitProps) {
 				color={'primary.text'}
 				opacity={0.7}
 			>
-				{/* Commit an domain name to secure it before registration. */}
 				Complete the steps to register a name
 			</Text>
 			<Divider opacity={0.5} my={3} />
-			{/* <CircularCountdown initialTimer={80} isStart={isStartCountdown} /> */}
 			<Stepper
 				size={'lg'}
 				index={activeStep}
