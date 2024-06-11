@@ -142,7 +142,7 @@ export default function FormPrimaryName(props: FormPrimaryNameProps) {
 					description: 'Please wait for transaction receipt'
 				}
 			});
-            await primaryNamePromise
+			await primaryNamePromise;
 			props.setStep('registrationSuccess');
 		} catch (e) {}
 	};
@@ -180,9 +180,11 @@ export default function FormPrimaryName(props: FormPrimaryNameProps) {
 							/>
 						</StepIndicator>
 						<Box>
-							<StepTitle>{step.title}</StepTitle>
+							<StepTitle>
+								<Text>{step.title}</Text>
+							</StepTitle>
 							<StepDescription>
-								{step.description}
+								<Text>{step.description}</Text>
 							</StepDescription>
 						</Box>
 					</Step>

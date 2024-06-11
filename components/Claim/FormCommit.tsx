@@ -131,11 +131,11 @@ export default function FormCommit(props: FormCommitProps) {
 			try {
 				let commit = await commitName(wallet, params);
 				commitmentPromise = new Promise(async (resolve) => {
-					console.log('Wait for transaction receipt')
+					console.log('Wait for transaction receipt');
 					let response = await client.waitForTransactionReceipt({
 						hash: commit
 					});
-					console.log(response)
+					console.log(response);
 					resolve(response);
 				});
 			} catch (error) {
@@ -150,9 +150,7 @@ export default function FormCommit(props: FormCommitProps) {
 						error: {
 							title: 'Error',
 							description: 'Failed to send transaction',
-							onCloseComplete: () => (
-								props.setStep("failed")
-							)
+							onCloseComplete: () => props.setStep('failed')
 						},
 						loading: {
 							title: 'Please wait',
@@ -161,7 +159,7 @@ export default function FormCommit(props: FormCommitProps) {
 					});
 				}
 			}
-			await commitmentPromise
+			await commitmentPromise;
 			console.log('Done commitment');
 			setActiveStep(1);
 			setIsStartCountdown(true);
@@ -393,10 +391,12 @@ export default function FormCommit(props: FormCommitProps) {
 								active={<StepNumber />}
 							/>
 						</StepIndicator>
-						<Box>
-							<StepTitle>{step.title}</StepTitle>
+						<Box color={'primary.text'}>
+							<StepTitle>
+								<Text color={'primary.text'}>{step.title}</Text>
+							</StepTitle>
 							<StepDescription>
-								{step.description}
+								<Text color={'primary.text'}>{step.description}</Text>
 							</StepDescription>
 						</Box>
 					</Step>
