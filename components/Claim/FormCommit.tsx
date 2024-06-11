@@ -102,6 +102,10 @@ export default function FormCommit(props: FormCommitProps) {
 				resolve(hash);
 			} catch (e: any) {
 				if (e instanceof TransactionExecutionError) {
+					toast({
+						status: 'error',
+						title: e.shortMessage
+					})
 					reject(e.shortMessage);
 				}
 				reject(e.reason);
