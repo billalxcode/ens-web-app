@@ -127,10 +127,6 @@ export default function FormCommit(props: FormCommitProps) {
 				account: walletOwner
 			};
 
-			// console.log("Commit")
-			// const commit = await commitName(wallet, params)
-			// console.log("Waiting")
-			// await client.waitForTransactionReceipt({ hash: commit })
 			let commitmentPromise;
 			try {
 				let commit = await commitName(wallet, params);
