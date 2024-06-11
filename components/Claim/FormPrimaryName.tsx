@@ -180,11 +180,11 @@ export default function FormPrimaryName(props: FormPrimaryNameProps) {
 							/>
 						</StepIndicator>
 						<Box>
-							<StepTitle>
-								<Text>{step.title}</Text>
+							<StepTitle style={{ color: 'primary.text' }}>
+								{step.title}
 							</StepTitle>
-							<StepDescription>
-								<Text>{step.description}</Text>
+							<StepDescription style={{ color: 'primary.text' }}>
+								{step.description}
 							</StepDescription>
 						</Box>
 					</Step>

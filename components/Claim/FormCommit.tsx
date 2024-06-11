@@ -37,6 +37,7 @@ import { useWeb3ModalProvider } from '@web3modal/ethers/react';
 import {
 	Address,
 	TransactionExecutionError,
+	TransactionReceiptNotFoundError,
 	WalletClient,
 	encodeFunctionData
 } from 'viem';
@@ -131,12 +132,25 @@ export default function FormCommit(props: FormCommitProps) {
 			try {
 				let commit = await commitName(wallet, params);
 				commitmentPromise = new Promise(async (resolve) => {
-					console.log('Wait for transaction receipt');
-					let response = await client.waitForTransactionReceipt({
-						hash: commit
-					});
-					console.log(response);
-					resolve(response);
+					const commitmentInterval = setInterval(async () => {
+						try {
+							const receipt = await client.getTransactionReceipt({ hash: commit })
+							console.log(receipt)
+							clearInterval(commitmentInterval)
+							resolve(receipt)
+						} catch (e) {
+							if (e instanceof TransactionReceiptNotFoundError) {
+								console.log(e.shortMessage)
+							}
+						}
+					}, 1500)
+					// console.log('Wait for transaction receipt');
+					// (await client.getTransactionReceipt({ hash: commit})).status
+					// let response = await client.waitForTransactionReceipt({
+					// 	hash: commit
+					// });
+					// console.log(response);
+					// resolve(response);
 				});
 			} catch (error) {
 				commitmentPromise = Promise.reject();
@@ -183,11 +197,12 @@ export default function FormCommit(props: FormCommitProps) {
 			await commitmentTimeout;
 			setIsStartCountdown(false);
 			setActiveStep(2);
-
+			console.log("Getting payment prices")
 			const prices: any = await getPaymentPrices(
 				params.name,
 				props.duration
 			);
+			console.log(prices)
 			const paymentPromise = handlePayment(wallet, params, prices[1]);
 			toast.promise(paymentPromise, {
 				success: {
@@ -246,11 +261,11 @@ export default function FormCommit(props: FormCommitProps) {
 							/>
 						</StepIndicator>
 						<Box color={'primary.text'}>
-							<StepTitle>
-								<Text color={'primary.text'}>{step.title}</Text>
+							<StepTitle style={{ color: 'primary.text' }}>
+								{step.title}
 							</StepTitle>
-							<StepDescription>
-								<Text color={'primary.text'}>{step.description}</Text>
+							<StepDescription style={{ color: 'primary.text' }}>
+								{step.description}
 							</StepDescription>
 						</Box>
 					</Step>

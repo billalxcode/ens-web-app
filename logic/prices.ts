@@ -4,13 +4,15 @@ import { PaymentAbi, PaymentAddress } from '@/contracts/payment';
 
 async function getPaymentPrices(name: string, years: number) {
 	const duration = years * 60 * 60 * 24 * 365;
-
+	console.log(duration)
+	console.log(PaymentAddress)
 	const result = await client.readContract({
 		address: PaymentAddress,
 		abi: PaymentAbi,
 		functionName: 'getPrices',
 		args: [name, duration]
 	});
+	console.log(result)
 	return result;
 }
 
