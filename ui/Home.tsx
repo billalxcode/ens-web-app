@@ -85,7 +85,7 @@ export default function Home() {
 							Atlanta, a decentralized blockchain name service
 							marketplace.
 						</Heading>
-						<Flex mt={18} gap={2}>
+						<Flex mt={18} gap={2} align={"center"}>
 							<Box>
 								<Input
 									placeholder="Search names or addresses"
