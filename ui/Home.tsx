@@ -1,33 +1,59 @@
 'use client';
-import {
-	Box,
-	Button,
-	Flex,
-	Heading,
-	Image,
-	Input,
-	Text
-} from '@chakra-ui/react';
+import { Box, Button, Flex, Heading, Image, Input } from '@chakra-ui/react';
 import React, { KeyboardEvent, useEffect, useState } from 'react';
-import Card from '../components/Card';
 import SearchBox from '../components/Home/SearchBox';
 import HowItWorks from '../components/Home/HowItWorks';
 import { ensNormalize } from 'ethers';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch, faSpinner } from '@fortawesome/free-solid-svg-icons';
+import isNameAvailable from '@/logic/available';
+import SearchStates from '@/interface/states/SearchStates';
 
 export default function Home() {
-	const [searchFocus, setSearchFocus] = useState<boolean>(false);
+	const [searchLoading, setSearchLoading] = useState(false);
 	const [searchQuery, setSearchQuery] = useState<string>('');
+	const [domain, setDomain] = useState<SearchStates>({
+		domain: '',
+		available: false
+	});
+	const [searchHidden, setSearchHidden] = useState(true);
 
-	useEffect(() => {
-		
-	}, []);
+	useEffect(() => {}, []);
+	const searchDomain = async () => {
+		try {
+			if (searchQuery.trim() == '') return;
+			const availbale = await isNameAvailable(searchQuery + '.eth');
+			setDomain({
+				domain: searchQuery + '.eth',
+				available: availbale
+			});
+		} catch (e: any) {}
+	};
+
+	const handleSearchDomain = () => {
+		if (searchQuery.trim() == "") {
+			setSearchLoading(false)
+			setSearchHidden(false)
+		} else {
+			setSearchLoading(true)
+			setSearchHidden(true)
+			searchDomain()
+			setTimeout(() => {
+				setSearchLoading(false)
+				setSearchHidden(false)
+			}, 1000)
+		}
+	};
+
 	const checkSpecialChar = (event: KeyboardEvent<HTMLInputElement>) => {
+		if (event.key == 'Enter') handleSearchDomain();
 		if (!/[0-9a-z]/i.test(event.key)) {
 			event.preventDefault();
 		}
 	};
 
 	const handleInputChange = (text: string) => {
+		if (text.trim() == "") return
 		const textNormalized = ensNormalize(text);
 		setSearchQuery(textNormalized);
 	};
@@ -43,8 +69,9 @@ export default function Home() {
 					flexDirection={['column-reverse', 'row']}
 				>
 					<Flex
-						w={['full', 400]}
+						w={['full', 500]}
 						flexDirection={'column'}
+						align={'center'}
 						gap={[0, 2, 3]}
 					>
 						<Heading
@@ -58,32 +85,50 @@ export default function Home() {
 							Atlanta, a decentralized blockchain name service
 							marketplace.
 						</Heading>
-						<Box>
-							<Input
-								placeholder="Search names or addresses"
-								p={8}
-								mt={10}
-								onKeyDown={(e) => checkSpecialChar(e)}
-								onFocus={() => setSearchFocus(true)}
-								onBlur={() => setSearchFocus(false)}
-								onChange={(e) =>
-									handleInputChange(e.target.value)
-								}
-								borderColor={'border.input'}
+						<Flex mt={18} gap={2}>
+							<Box>
+								<Input
+									placeholder="Search names or addresses"
+									p={[6, 8]}
+									onKeyDown={(e) => checkSpecialChar(e)}
+									onChange={(e) =>
+										handleInputChange(e.target.value)
+									}
+									borderColor={'border.input'}
+									_hover={{
+										borderColor: 'border.hover.input'
+									}}
+									_focusVisible={{
+										borderColor: 'bg.blue',
+										boxShadow: 'md'
+									}}
+								/>
+								<SearchBox
+									hidden={searchHidden}
+									searchQuery={searchQuery}
+									domain={domain}
+								/>
+							</Box>
+							<Button
+								p={[6, 8]}
+								bgGradient={'linear(to-l, #8aa9f2, #9a76ff)'}
+								transition={'all .5s ease-in-out'}
+								color={'primary.text'}
 								_hover={{
-									borderColor: 'border.hover.input'
+									transform: 'translateY(-5px)'
 								}}
-								_focusVisible={{
-									borderColor: 'bg.blue',
-									boxShadow: 'md'
+								_active={{
+									bgColor: 'bg.button.active.primary'
 								}}
-							/>
-
-							<SearchBox
-								hidden={searchFocus && searchQuery !== ''}
-								searchQuery={searchQuery}
-							/>
-						</Box>
+								onClick={() => handleSearchDomain()}
+							>
+								{searchLoading ? (
+									<FontAwesomeIcon icon={faSpinner} spin />
+								) : (
+									<FontAwesomeIcon icon={faSearch} />
+								)}
+							</Button>
+						</Flex>
 					</Flex>
 					<Box>
 						<Image

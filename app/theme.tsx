@@ -18,7 +18,8 @@ const theme = extendTheme({
 		primary: {
 			text: '#f8f5f8C8',
 			bold: '#5e73e8',
-			secondary: '#36ab61'
+			secondary: '#36ab61',
+			warning: '#ff9900'
 		},
 		bg: {
 			body: '#111827',
