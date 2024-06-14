@@ -26,6 +26,7 @@ import {
 	setPrimaryName,
 	setResolver
 } from '@ensdomains/ensjs/wallet';
+import { ResolverAddress } from '@/contracts/resolver';
 
 export default function FormPrimaryName(props: FormPrimaryNameProps) {
 	const toast = useToast();
@@ -63,7 +64,7 @@ export default function FormPrimaryName(props: FormPrimaryNameProps) {
 				coin: 'ETH',
 				value: props.owner,
 				resolverAddress:
-					'0x8FADE66B79cC9f707aB26799354482EB93a5B7dD' as `0x${string}`,
+					ResolverAddress as `0x${string}`,
 				account: props.owner as `0x${string}`
 			});
 			const addressRecordPromise = client.waitForTransactionReceipt({
@@ -217,7 +218,7 @@ export default function FormPrimaryName(props: FormPrimaryNameProps) {
 						}}
 						onClick={() => handleOpenWallet()}
 					>
-						Open Wallet
+						Set Primary Name
 					</Button>
 				)}
 			</Flex>
