@@ -61,8 +61,6 @@ export default function ModalExtendName(props: ModalExtendNameProps) {
 		})();
 	}, [
 		durationInYear,
-		estimatedRegistration,
-		isEstimateRegistration,
 		props.username
 	]);
 
