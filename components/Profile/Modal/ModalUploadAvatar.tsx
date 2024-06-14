@@ -1,5 +1,5 @@
 import ModalUploadAvatarProps from '@/interface/props/modal/ModalUploadAvatarProps';
-import { createWalletClient } from '@/logic/client';
+import client, { createWalletClient } from '@/logic/client';
 import {
 	Modal,
 	ModalOverlay,
@@ -26,6 +26,11 @@ import {
 	bytesToHex
 } from 'viem';
 import { sha256 } from '@noble/hashes/sha256';
+import { AvatarUploadResult, resolveAvatarURL, uploadAvatar } from '@/logic/avatar';
+import { ensNormalize } from 'ethers';
+import { setTextRecord } from '@ensdomains/ensjs/wallet';
+import { ResolverAddress } from '@/contracts/resolver';
+import { getTextRecord } from '@ensdomains/ensjs/public';
 
 const dataURLToBytes = (dataURL: string) => {
 	const base64 = dataURL.split(',')[1];
@@ -40,13 +45,12 @@ export default function ModalUploadAvatar(props: ModalUploadAvatarProps) {
 
 	const generateSignature = async (
 		wallet: WalletClient,
-		account: Address
+		account: Address,
+		expiry: string
 	) => {
-		const expiry = `${Date.now() + 1000 * 60 * 60 * 24 * 7}`;
-		console.log(props.avatar);
 		const urlHash = bytesToHex(sha256(dataURLToBytes(props.avatar)));
 
-		const signature = await wallet.signTypedData({
+		const signaturePromise = wallet.signTypedData({
 			account,
 			primaryType: 'Upload',
 			domain: {
@@ -68,14 +72,81 @@ export default function ModalUploadAvatar(props: ModalUploadAvatarProps) {
 				hash: urlHash
 			}
 		});
+
+        toast.promise(signaturePromise, {
+			success: {
+				title: 'Success',
+				description: 'Sign message successfully'
+			},
+			error: {
+				title: 'Error',
+				description: 'Failed to sign message'
+			},
+			loading: {
+				title: 'Please wait',
+				description: 'Please wait for sign message'
+			}
+		});
+        const signature = await signaturePromise
+		return signature;
 	};
 
 	const handleSignAndUploadClick = async () => {
 		try {
+			const expiry = `${Date.now() + 1000 * 60 * 60 * 24 * 7}`;
+
 			const wallet = createWalletClient(walletProvider);
 			const account = (await wallet.getAddresses())[0];
-			console.log(account);
-			await generateSignature(wallet, account);
+            
+			const signature = await generateSignature(wallet, account, expiry);
+			const uploaded: AvatarUploadResult = await uploadAvatar(
+				ensNormalize(props.name),
+				props.avatar,
+				signature,
+				expiry,
+				client.chain.name
+			);
+			if ('message' in uploaded && uploaded.message == 'uploaded') {
+				const name = ensNormalize(props.name);
+				const value = resolveAvatarURL(name, client.chain.name);
+				
+				const avatarRecord = await getTextRecord(client, {
+					name: ensNormalize(props.name),
+					key: 'avatar'
+				})
+				
+                if (avatarRecord === null) {
+                    const avatarRecordPromise = setTextRecord(wallet, {
+                        name,
+                        key: 'avatar',
+                        value: value,
+                        resolverAddress: ResolverAddress as `0x${string}`,
+                        account
+                    });
+                    toast.promise(avatarRecordPromise, {
+                        success: {
+                            title: 'Success',
+                            description: 'Transaction success'
+                        },
+                        error: {
+                            title: 'Error',
+                            description: 'Failed to send transaction'
+                        },
+                        loading: {
+                            title: 'Please wait',
+                            description: 'Please wait for transaction receipt'
+                        }
+                    });
+                    await avatarRecordPromise
+                }
+                props.handleOnSuccess()
+            } else if ('error' in uploaded) {
+				toast({
+					status: 'error',
+					title: 'Error',
+					description: uploaded.error
+				});
+			}
 		} catch (e: any) {
 			if (
 				e instanceof UserRejectedRequestError ||
@@ -87,12 +158,12 @@ export default function ModalUploadAvatar(props: ModalUploadAvatarProps) {
 					description: e.shortMessage
 				});
 			} else {
-                toast({
-                    status: 'error',
-                    title: 'Error',
-                    description: e.reason
-                });
-            }
+				toast({
+					status: 'error',
+					title: 'Error',
+					description: e.reason
+				});
+			}
 		}
 	};
 
