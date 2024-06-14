@@ -4,4 +4,5 @@ export default interface ModalUploadAvatarProps {
 	name: string;
 	onOpen: () => void;
 	onClose: () => void;
+	handleOnSuccess: () => void;
 }

@@ -42,7 +42,7 @@ export default function Claim(props: ClaimProps) {
 				);
 			}
 		})();
-	}, []);
+	}, [props.params.username]);
 
 	const renderContent = () => {
 		if (step == 'registration') {

@@ -25,7 +25,8 @@ import {
 	GetExpiryReturnType,
 	getAddressRecord,
 	getExpiry,
-	getOwner
+	getOwner,
+	getTextRecord
 } from '@ensdomains/ensjs/public';
 import { ensNormalize } from 'ethers';
 import React, { useEffect, useState } from 'react';
@@ -37,6 +38,7 @@ import { ContractFunctionExecutionError } from 'viem';
 import Expiry from '@/components/Profile/Expiry';
 import ModalExtendName from '@/components/Profile/Modal/ModalExtendName';
 import ModalEditProfile from '@/components/Profile/Modal/ModalEditProfile';
+import { resolveAvatarURL } from '@/logic/avatar';
 
 export default function Profile(props: ProfileProps) {
 	const toast = useToast();
@@ -51,7 +53,7 @@ export default function Profile(props: ProfileProps) {
 		onClose: onEditProfileClose
 	} = useDisclosure();
 	const [ensAvatar, setEnsAvatar] = useState(
-		`https://euc.li/sepolia/${props.params.username}`
+		resolveAvatarURL(ensNormalize(props.params.username), client.chain.name)
 	);
 	const [ensAddress, setEnsAddress] = useState('');
 	const [ensOwner, setEnsOwner] = useState('');
@@ -68,18 +70,31 @@ export default function Profile(props: ProfileProps) {
 	useEffect(() => {
 		(async () => {
 			try {
+				console.log("Get name")
 				const name = ensNormalize(props.params.username);
-				const avatarUrl = await getEnsAvatar(client, { name });
+				let avatarUrl = await getEnsAvatar(client, { name });
+				console.log("Get avatar")
+				const avatarRecord = await getTextRecord(client, {
+					name,
+					key: 'avatar'
+				});
+				if (avatarRecord === null) {
+					console.log("Set default avatar")
+					avatarUrl =
+						'data:image/svg+xml;base64,CiAgPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMTAgMTEwIj4KICAgIDxkZWZzPgogICAgICA8bGluZWFyR3JhZGllbnQgaWQ9Imd6ciIgeDE9IjEwNi45NzUiIHkxPSIxMzYuMTU2IiB4Mj0iLTEyLjk4MTUiIHkyPSIxMy41MzQ3IiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+CiAgICAgICAgZ3JhZGllbnRUcmFuc2Zvcm09InRyYW5zbGF0ZSgxMzEuNjM4IDEyOS44MzUpIHJvdGF0ZSgtMTQxLjE5NCkgc2NhbGUoMTg1LjU4MikiPgogICAgICAgIDxzdG9wIG9mZnNldD0iMC4xNTYyIiBzdG9wLWNvbG9yPSJoc2woMTUxLCA3MiUsIDkwJSkiIC8+CiAgICAgICAgPHN0b3Agb2Zmc2V0PSIwLjM5NTgiIHN0b3AtY29sb3I9ImhzbCgxNTEsIDczJSwgNzglKSIgLz4KICAgICAgICA8c3RvcCBvZmZzZXQ9IjAuNzI5MiIgc3RvcC1jb2xvcj0iaHNsKDIzMSwgNzUlLCA2MiUpIiAvPgogICAgICAgIDxzdG9wIG9mZnNldD0iMC45MDYzIiBzdG9wLWNvbG9yPSJoc2woMjQxLCA4MCUsIDQ3JSkiIC8+CiAgICAgICAgPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSJoc2woMjQxLCA4MiUsIDQ3JSkiIC8+CiAgICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgICA8L2RlZnM+CiAgICA8cGF0aAogICAgICBkPSJNMTEwIDU1QzExMCAyNC42MjQ0IDg1LjM3NTYgMCA1NSAwQzI0LjYyNDQgMCAwIDI0LjYyNDQgMCA1NUMwIDg1LjM3NTYgMjQuNjI0NCAxMTAgNTUgMTEwQzg1LjM3NTYgMTEwIDExMCA4NS4zNzU2IDExMCA1NVoiCiAgICAgIGZpbGw9InVybCgjZ3pyKSIgLz4KICA8L3N2Zz4KICAgIA==';
+				}
+				console.log("Get address record")
 				const address = await getAddressRecord(client, {
 					name: props.params.username,
 					coin: 'ETH'
 				});
+				console.log("get owner")
 				const owner = await getOwner(client, { name });
+				console.log("Get expiry")
 				const expiry = await getExpiry(client, { name });
-
+				
 				setEnsAvatar(
-					avatarUrl ||
-						`https://euc.li/sepolia/${props.params.username}`
+					avatarUrl || resolveAvatarURL(name, client.chain.name)
 				);
 				setEnsAddress(address?.value || '');
 				setEnsOwner(owner?.owner || '');
@@ -91,12 +106,7 @@ export default function Profile(props: ProfileProps) {
 			}
 		})();
 	}, [
-		props.params.username,
-		ensAvatar,
-		ensAddress,
-		ensOwner,
-		expiryDate,
-		isLoaded
+		props.params.username
 	]);
 
 	return (
