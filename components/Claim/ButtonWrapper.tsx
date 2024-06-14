@@ -31,7 +31,7 @@ export default function ButtonWrapper(props: ButtonWrapperProps) {
 			}
 			setIsLoading(false);
 		})();
-	}, [isConnected, walletAddress, walletProvider, isLoading]);
+	}, [isConnected]);
 
 	const renderContent = () => {
 		if (!isLoading && !isConnected) {
