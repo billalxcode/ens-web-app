@@ -85,11 +85,12 @@ export default function Home() {
 							Atlanta, a decentralized blockchain name service
 							marketplace.
 						</Heading>
-						<Flex mt={18} gap={2} align={"center"}>
+						<Flex mt={18} gap={2} align={"center"} justify={"start"}>
 							<Box>
 								<Input
 									placeholder="Search names or addresses"
 									p={[6, 8]}
+									w={300}
 									onKeyDown={(e) => checkSpecialChar(e)}
 									onChange={(e) =>
 										handleInputChange(e.target.value)

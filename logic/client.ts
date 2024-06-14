@@ -12,7 +12,9 @@ let chain = process.env.NEXT_PUBLIC_APP_ENV == 'prod' ? mainnet : sepolia
 
 const client = createPublicClient({
 	chain: addEnsContracts(chain),
-	transport: http()
+	transport: http(
+		'https://sepolia.infura.io/v3/c47fcf77394e40e78eac21970ed5feeb'
+	)
 });
 
 const createWalletClient = (provider: any) => {

@@ -10,8 +10,8 @@ export default function SearchBox(props: SearchBoxProps) {
 			transition={{ exit: { delay: 0.3 }, enter: { delay: 0.3 } }}
 		>
 			<Box
-				w={'full'}
-				position={'relative'}
+				w={300}
+				position={"absolute"}
 				bgColor={'bg.card2'}
 				boxShadow={'lg'}
 			>
