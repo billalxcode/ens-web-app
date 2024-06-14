@@ -38,12 +38,7 @@ export default function FormRegistration(props: FormRegistrationProps) {
 				}, 1000);
 			}
 		})();
-	}, [
-		props.durationInYear,
-		props.params.username,
-		estimatedRegistration,
-		isEstimateRegistration
-	]);
+	}, [props.durationInYear, props.params.username]);
 
 	return (
 		<Card>
