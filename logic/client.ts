@@ -13,7 +13,7 @@ const chain = process.env.NEXT_PUBLIC_APP_ENV == 'prod' ? mainnet : sepolia
 const client = createPublicClient({
 	chain: addEnsContracts(chain),
 	transport: http(
-		`https://${chain.name.toLowerCase()}.infura.io/v3/cfa6ae2501cc4354a74e20432507317c`
+		`https://${process.env.NEXT_PUBLIC_APP_ENV == 'prod' ? 'mainnet' : 'sepolia'}.infura.io/v3/cfa6ae2501cc4354a74e20432507317c`
 	)
 });
 
