@@ -144,6 +144,8 @@ export default function ModalSetPrimary(props: ModalSetPrimaryNameProps) {
 				}
 			});
 			await primaryNamePromise;
+			setActiveStep(3)
+			props.onClose()
 		} catch (e: any) {
             if (
 				e instanceof UserRejectedRequestError ||
