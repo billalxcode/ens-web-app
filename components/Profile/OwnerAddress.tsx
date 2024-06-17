@@ -7,7 +7,7 @@ export default function OwnerAddress(props: { address: string }) {
 		return (
 			<Flex flexDirection={'column'} gap={2}>
 				<Heading size={'sm'} color={'primary.text'}>
-					Ownner
+					Owner
 				</Heading>
 				<Flex
 					bgColor={'bg.card2'}

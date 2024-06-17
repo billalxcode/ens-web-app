@@ -1,18 +1,15 @@
 import BackgroundParticles from '@/components/Decorations/BackgroundParticles';
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
-import ProfileProps from '@/interface/props/ProfileProps';
-import Profile from '@/ui/Profile';
-import { Flex } from '@chakra-ui/react';
+import Names from '@/ui/Names';
 import React from 'react';
 
-export default function page(props: ProfileProps) {
+export default function page() {
 	return (
 		<>
 			<BackgroundParticles />
 			<Header />
-
-			<Profile params={props.params} />
+			<Names />
 
 			<Footer />
 		</>

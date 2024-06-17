@@ -18,7 +18,6 @@ export default function Home() {
 	});
 	const [searchHidden, setSearchHidden] = useState(true);
 
-	// useEffect(() => {}, []);
 	const searchDomain = async () => {
 		try {
 			if (searchQuery.trim() == '') return;

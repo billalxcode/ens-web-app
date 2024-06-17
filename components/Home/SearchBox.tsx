@@ -1,5 +1,5 @@
 import { Box, Collapse, Flex } from '@chakra-ui/react';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import SearchItem from './SearchItem';
 import SearchBoxProps from '@/interface/props/SearchBoxProps';
 

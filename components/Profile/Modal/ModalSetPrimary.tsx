@@ -1,40 +1,39 @@
 import React, { useMemo, useState } from 'react';
-import Card from '../Card';
 import {
-	Box,
+	Modal,
+	ModalOverlay,
+	ModalContent,
+	ModalHeader,
+	ModalCloseButton,
+	ModalBody,
+	ModalFooter,
 	Button,
-	Divider,
-	Flex,
-	Heading,
-	Step,
-	StepDescription,
-	StepIcon,
-	StepIndicator,
-	StepNumber,
-	StepStatus,
-	StepTitle,
 	Stepper,
-	Text,
+	Step,
+	StepIndicator,
+	StepStatus,
+	StepIcon,
+	StepNumber,
+	Box,
+	StepTitle,
+	StepDescription,
 	useSteps,
-	useToast
+    useToast
 } from '@chakra-ui/react';
-import FormPrimaryNameProps from '@/interface/props/FormPrimaryNameProps';
-import { useWeb3ModalProvider } from '@web3modal/ethers/react';
+import ModalSetPrimaryNameProps from '@/interface/props/modal/ModalSetPrimaryNameProps';
 import client, { createWalletClient } from '@/logic/client';
-import {
-	setAddressRecord,
-	setPrimaryName,
-	setResolver
-} from '@ensdomains/ensjs/wallet';
+import { setAddressRecord, setPrimaryName, setResolver } from '@ensdomains/ensjs/wallet';
 import { ResolverAddress } from '@/contracts/resolver';
+import { useWeb3ModalProvider } from '@web3modal/ethers/react';
 import { TransactionExecutionError, UserRejectedRequestError } from 'viem';
 
-export default function FormPrimaryName(props: FormPrimaryNameProps) {
-	const toast = useToast();
-	const { walletProvider } = useWeb3ModalProvider();
-	const [isLoading, setIsLoading] = useState(false);
+export default function ModalSetPrimary(props: ModalSetPrimaryNameProps) {
+	const toast = useToast()
+    const [isLoading, setIsLoading] = useState(false);
+    
+    const { walletProvider } = useWeb3ModalProvider()
 
-	const primaryNameSteps = useMemo(() => {
+    const primaryNameSteps = useMemo(() => {
 		return [
 			{
 				title: 'Step 1',
@@ -56,7 +55,7 @@ export default function FormPrimaryName(props: FormPrimaryNameProps) {
 		count: primaryNameSteps.length
 	});
 
-	const handleOpenWallet = async () => {
+    const handleSetPrimaryName = async () => {
 		try {
 			setIsLoading(true);
 			const wallet = createWalletClient(walletProvider);
@@ -64,8 +63,7 @@ export default function FormPrimaryName(props: FormPrimaryNameProps) {
 				name: props.name,
 				coin: 'ETH',
 				value: props.owner,
-				resolverAddress:
-					ResolverAddress as `0x${string}`,
+				resolverAddress: ResolverAddress as `0x${string}`,
 				account: props.owner as `0x${string}`
 			});
 			const addressRecordPromise = client.waitForTransactionReceipt({
@@ -88,6 +86,7 @@ export default function FormPrimaryName(props: FormPrimaryNameProps) {
 					description: 'Please wait for transaction receipt'
 				}
 			});
+
 			await addressRecordPromise;
 			setActiveStep(1);
 			const resolver = await setResolver(wallet, {
@@ -145,9 +144,8 @@ export default function FormPrimaryName(props: FormPrimaryNameProps) {
 				}
 			});
 			await primaryNamePromise;
-			props.setStep('registrationSuccess');
 		} catch (e: any) {
-			if (
+            if (
 				e instanceof UserRejectedRequestError ||
 				e instanceof TransactionExecutionError
 			) {
@@ -163,83 +161,86 @@ export default function FormPrimaryName(props: FormPrimaryNameProps) {
 					description: e.reason
 				});
 			}
-		}
+        }
 	};
-	return (
-		<Card>
-			<Heading textAlign={'center'} size={'sm'} opacity={0.8}>
-				Complete step-by-step
-			</Heading>
-			<Text
-				textAlign={'center'}
-				size={'sm'}
-				color={'primary.text'}
-				opacity={0.7}
-			>
-				{/* Commit an domain name to secure it before registration. */}
-				Complete the steps to register a name
-			</Text>
-			<Divider opacity={0.5} my={3} />
-			{/* <CircularCountdown initialTimer={80} isStart={isStartCountdown} /> */}
-			<Stepper
-				size={'lg'}
-				index={activeStep}
-				mt={5}
-				mx={[0, 5]}
-				orientation="vertical"
-				alignItems={'center'}
-			>
-				{primaryNameSteps.map((step, index) => (
-					<Step key={`stepper-${index}`}>
-						<StepIndicator>
-							<StepStatus
-								complete={<StepIcon />}
-								incomplete={<StepNumber />}
-								active={<StepNumber />}
-							/>
-						</StepIndicator>
-						<Box>
-							<StepTitle style={{ color: 'primary.text' }}>
-								{step.title}
-							</StepTitle>
-							<StepDescription style={{ color: 'primary.text' }}>
-								{step.description}
-							</StepDescription>
-						</Box>
-					</Step>
-				))}
-			</Stepper>
 
-			<Flex gap={3} mt={10}>
-				{isLoading ? (
-					<Button
-						w={'full'}
-						p={7}
-						transition={'all .5s ease-in-out'}
-						color={'primary.text'}
-						bgColor={'bg.button.secondary'}
+	return (
+		<Modal
+			isOpen={props.isOpen}
+			onClose={props.onClose}
+			isCentered
+			motionPreset={'slideInBottom'}
+		>
+			<ModalOverlay bg="blackAlpha.300" backdropFilter="blur(10px)" />
+			<ModalContent bgColor={'bg.card'}>
+				<ModalHeader textAlign={'center'}>Set Primary Name</ModalHeader>
+				<ModalCloseButton />
+				<ModalBody>
+					<Stepper
+						size={'lg'}
+						index={activeStep}
+						mt={5}
+						mx={[0, 5]}
+						orientation="vertical"
+						alignItems={'center'}
 					>
-						Please wait
-					</Button>
-				) : (
+						{primaryNameSteps.map((step, index) => (
+							<Step key={`stepper-${index}`}>
+								<StepIndicator>
+									<StepStatus
+										complete={<StepIcon />}
+										incomplete={<StepNumber />}
+										active={<StepNumber />}
+									/>
+								</StepIndicator>
+								<Box>
+									<StepTitle
+										style={{ color: 'primary.text' }}
+									>
+										{step.title}
+									</StepTitle>
+									<StepDescription
+										style={{ color: 'primary.text' }}
+									>
+										{step.description}
+									</StepDescription>
+								</Box>
+							</Step>
+						))}
+					</Stepper>
+				</ModalBody>
+
+				<ModalFooter gap={3}>
 					<Button
 						w={'full'}
-						p={7}
-						bgGradient={'linear(to-l, #8aa9f2, #9a76ff)'}
-						transition={'all .5s ease-in-out'}
+						transition={'all 0.5s ease-in-out'}
+						bgColor={'bg.button.secondary'}
 						color={'primary.text'}
 						_hover={{
-							transform: 'translateY(-5px)'
+							bgColor: 'bg.button.hover.secondary'
+						}}
+						onClick={props.onClose}
+					>
+						Close
+					</Button>
+					<Button
+						w={'full'}
+						transition={'all .5s ease-in-out'}
+						bgGradient={'linear(to-l, #8aa9f2, #9a76ff)'}
+						bgSize={'100 100'}
+						color={'primary.text'}
+						_hover={{
+							transform: 'translateY(-3px)'
 						}}
 						_active={{
-							bgColor: 'bg.button.active.primary'
+							bgGradient: 'linear(to-l, #8aa9f2, #9a76ff)'
 						}}
-						onClick={() => handleOpenWallet()}
+						onClick={() => handleSetPrimaryName()}
 					>
 						Set Primary Name
 					</Button>
-				)}
-			</Flex>
-		</Card>
+				</ModalFooter>
+			</ModalContent>
+		</Modal>
 	);
 }
