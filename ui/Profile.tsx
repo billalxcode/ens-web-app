@@ -127,6 +127,8 @@ export default function Profile(props: ProfileProps) {
 							isLoaded={isLoaded}
 							borderRadius={5}
 							w={'full'}
+							startColor={'bg.skeletonStart'}
+							endColor={'bg.skeletonEnd'}
 						>
 							<Card>
 								<Flex
@@ -187,6 +189,8 @@ export default function Profile(props: ProfileProps) {
 							isLoaded={isLoaded}
 							borderRadius={5}
 							w={'full'}
+							startColor={'bg.skeletonStart'}
+							endColor={'bg.skeletonEnd'}
 						>
 							<Card>
 								<Flex flexDirection={'column'} gap={5}>
