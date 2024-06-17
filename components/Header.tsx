@@ -26,7 +26,6 @@ import React, { useEffect, useState } from 'react';
 import { getEnsAvatar } from 'viem/actions';
 
 export default function Header() {
-	const { open: OpenModal } = useWeb3Modal();
 	const { isConnected, address } = useWeb3ModalAccount();
 
 	const [ensAvatar, setEnsAvatar] = useState(

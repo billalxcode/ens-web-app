@@ -19,15 +19,11 @@ import {
 import { useWeb3ModalAccount } from '@web3modal/ethers/react';
 import {
 	GetNamesForAddressReturnType,
-	NameWithRelation,
 	getNamesForAddress
 } from '@ensdomains/ensjs/subgraph';
 import client from '@/logic/client';
 import Card from '@/components/Card';
 import moment from 'moment';
-import { getAvatarRecord, resolveAvatarURL } from '@/logic/avatar';
-import { getEnsAvatar } from 'viem/actions';
-import { getTextRecord } from '@ensdomains/ensjs/public';
 import Avatar from '@/components/Avatar';
 
 export default function Names() {

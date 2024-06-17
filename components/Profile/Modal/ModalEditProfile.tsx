@@ -9,17 +9,14 @@ import {
 	ModalCloseButton,
 	Button,
 	Flex,
-	Box,
 	Input,
-	Text,
 	Image,
 	useToast,
 	useDisclosure,
-	Heading,
-	Alert,
 	AlertIcon,
 	AlertTitle,
-	AlertDescription
+	AlertDescription,
+	Alert
 } from '@chakra-ui/react';
 import ModalEditProfileProps from '@/interface/props/modal/ModalEditProfileProps';
 import ModalUploadAvatar from './ModalUploadAvatar';
@@ -33,7 +30,7 @@ import { useWeb3ModalProvider } from '@web3modal/ethers/react';
 export default function ModalEditProfile(props: ModalEditProfileProps) {
 	const toast = useToast();
 	const inputAvatarRef = useRef<HTMLInputElement>(null);
-	const { walletProvider } = useWeb3ModalProvider()
+	const { walletProvider } = useWeb3ModalProvider();
 	const {
 		isOpen: isUploadAvatarOpen,
 		onOpen: onUploadAvatarOpen,
@@ -81,15 +78,15 @@ export default function ModalEditProfile(props: ModalEditProfileProps) {
 	};
 
 	const handleUpdateResolver = async () => {
-		const wallet = createWalletClient(walletProvider)
-		const account = (await wallet.getAddresses())[0]
+		const wallet = createWalletClient(walletProvider);
+		const account = (await wallet.getAddresses())[0];
 
 		const resolverPromise = setResolver(wallet, {
 			name: ensNormalize(props.name),
 			resolverAddress: ResolverAddress,
-			contract: "nameWrapper",
+			contract: 'nameWrapper',
 			account
-		})
+		});
 		toast.promise(resolverPromise, {
 			success: {
 				title: 'Success',
@@ -104,8 +101,8 @@ export default function ModalEditProfile(props: ModalEditProfileProps) {
 				description: 'Please wait for transaction receipt'
 			}
 		});
-		await resolverPromise
-	}
+		await resolverPromise;
+	};
 
 	const handleAvatarOnSuccess = () => {
 		onUploadAvatarClose();
@@ -179,11 +176,13 @@ export default function ModalEditProfile(props: ModalEditProfileProps) {
 				</>
 			);
 		} else {
-			return <Alert status='warning'>
-				<AlertIcon />
-				<AlertTitle>Reason</AlertTitle>
-				<AlertDescription>{ reasonMessage }</AlertDescription>
-			</Alert>;
+			return (
+				<Alert status="warning">
+					<AlertIcon />
+					<AlertTitle>Reason</AlertTitle>
+					<AlertDescription>{reasonMessage}</AlertDescription>
+				</Alert>
+			);
 		}
 	};
 	return (

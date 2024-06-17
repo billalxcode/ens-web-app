@@ -3,18 +3,9 @@ import {
 	Box,
 	Flex,
 	Heading,
-	Step,
-	StepDescription,
-	StepIcon,
-	StepIndicator,
-	StepNumber,
-	StepStatus,
-	StepTitle,
-	Stepper,
 	Text,
-	useSteps
 } from '@chakra-ui/react';
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ClaimProps from '@/interface/props/ClaimProps';
 import FormRegistration from '@/components/Claim/FormRegistration';
 import FormCommit from '@/components/Claim/FormCommit';

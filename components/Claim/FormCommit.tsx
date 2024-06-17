@@ -27,23 +27,16 @@ import {
 	randomSecret
 } from '@ensdomains/ensjs/utils';
 import {
-	CommitNameParameters,
 	commitName,
-	registerName,
-	setPrimaryName
 } from '@ensdomains/ensjs/wallet';
 import client, { createWalletClient } from '@/logic/client';
 import { useWeb3ModalProvider } from '@web3modal/ethers/react';
 import {
-	Address,
 	TransactionExecutionError,
 	TransactionReceiptNotFoundError,
-	WalletClient,
-	encodeFunctionData
+	WalletClient
 } from 'viem';
-import ToasterLoading from '../Toaster/ToasterLoading';
 import { getPaymentPrices } from '@/logic/prices';
-import { PaymentAbi } from '@/contracts/payment';
 import { sendPayment } from '@/logic/payment';
 import ButtonCountdown from '../ButtonCountdown';
 
@@ -51,7 +44,6 @@ export default function FormCommit(props: FormCommitProps) {
 	const toast = useToast();
 	const { walletProvider } = useWeb3ModalProvider();
 	const [isStartCountdown, setIsStartCountdown] = useState(false);
-	const startCountdown = () => {};
 
 	const registrationSteps = useMemo(() => {
 		return [

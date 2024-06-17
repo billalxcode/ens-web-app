@@ -6,7 +6,6 @@ import {
 	http
 } from 'viem';
 import { mainnet, sepolia } from 'viem/chains';
-// import { mainnet } from 'viem/chains';
 
 const chain = process.env.NEXT_PUBLIC_APP_ENV == 'prod' ? mainnet : sepolia
 

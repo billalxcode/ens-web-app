@@ -14,7 +14,6 @@ import {
 	useToast
 } from '@chakra-ui/react';
 import {
-	useWeb3ModalAccount,
 	useWeb3ModalProvider
 } from '@web3modal/ethers/react';
 import React from 'react';

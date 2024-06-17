@@ -1,11 +1,5 @@
 'use client';
 import { Button } from '@chakra-ui/react';
-import {
-	Box,
-	CircularProgress,
-	CircularProgressLabel,
-	Text
-} from '@chakra-ui/react';
 import React, { Component } from 'react';
 
 

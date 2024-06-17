@@ -9,13 +9,6 @@ import {
 	Flex,
 	Heading,
 	Image,
-	Modal,
-	ModalBody,
-	ModalCloseButton,
-	ModalContent,
-	ModalFooter,
-	ModalHeader,
-	ModalOverlay,
 	Skeleton,
 	Text,
 	useDisclosure,
@@ -34,7 +27,6 @@ import React, { useEffect, useState } from 'react';
 import { getEnsAvatar } from 'viem/actions';
 import Address from '@/components/Profile/Address';
 import OwnerAddress from '@/components/Profile/OwnerAddress';
-import moment from 'moment';
 import { ContractFunctionExecutionError } from 'viem';
 import Expiry from '@/components/Profile/Expiry';
 import ModalExtendName from '@/components/Profile/Modal/ModalExtendName';

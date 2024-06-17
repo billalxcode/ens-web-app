@@ -1,6 +1,6 @@
 'use client';
 import { Box, Button, Flex, Heading, Image, Input } from '@chakra-ui/react';
-import React, { KeyboardEvent, useEffect, useState } from 'react';
+import React, { KeyboardEvent, useState } from 'react';
 import SearchBox from '../components/Home/SearchBox';
 import HowItWorks from '../components/Home/HowItWorks';
 import { ensNormalize } from 'ethers';
