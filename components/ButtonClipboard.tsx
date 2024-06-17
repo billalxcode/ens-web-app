@@ -1,16 +1,21 @@
 import ButtonClipboardProps from '@/interface/props/ButtonClipboard';
-import { Button } from '@chakra-ui/react';
+import { Button, useToast } from '@chakra-ui/react';
 import { faCheck, faClipboard } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState } from 'react';
 
 export default function ButtonClipboard(props: ButtonClipboardProps) {
 	let clickTimeout = props.timeout ?? 1000;
+	const toast = useToast()
 	const [copied, setCopied] = useState(false);
 
 	const handleClick = () => {
 		setCopied(true);
 		navigator.clipboard.writeText(props.value);
+		toast({
+			status: 'info',
+			description: 'Copied'
+		})
 		setTimeout(() => setCopied(false), clickTimeout);
 	};
 
