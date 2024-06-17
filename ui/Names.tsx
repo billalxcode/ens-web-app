@@ -55,6 +55,7 @@ export default function Names() {
 			flexDirection={'column'}
 			mx={[3, 10]}
 			my={10}
+			mb={100}
 		>
 			<Box mb={30} w={['full', 600]}>
 				<Heading mb={2} size={'lg'} textAlign={'center'}>
