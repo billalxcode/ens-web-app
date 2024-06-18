@@ -46,17 +46,20 @@ export default function Header() {
 				const ensName = await getName(client, {
 					address: address as `0x${string}`
 				});
-				const name = ensName.name.normalize();
-				const avatarRecord = await getTextRecord(client, {
-					name,
-					key: 'avatar'
-				});
-				setEnsName(name);
-				if (avatarRecord !== null) {
-					const avatarUrl = await getEnsAvatar(client, { name });
-					setEnsAvatar(
-						avatarUrl || resolveAvatarURL(name, client.chain.name)
-					);
+				if (ensName !== null) {
+					const name = ensName.name.normalize();
+					const avatarRecord = await getTextRecord(client, {
+						name,
+						key: 'avatar'
+					});
+					setEnsName(name);
+					if (avatarRecord !== null) {
+						const avatarUrl = await getEnsAvatar(client, { name });
+						setEnsAvatar(
+							avatarUrl ||
+								resolveAvatarURL(name, client.chain.name)
+						);
+					}
 				}
 			}
 			setIsLoaded(true);
@@ -92,7 +95,8 @@ export default function Header() {
 				</Link>
 			</Flex>
 			<Flex gap={2}>
-				{!isConnected ? null : (
+				{isConnected && isLoaded ? (
+					
 					<>
 						<Skeleton
 							isLoaded={isLoaded}
@@ -134,14 +138,16 @@ export default function Header() {
 								/>
 							</MenuButton>
 							<MenuList bgColor={'bg.card'} cursor={'pointer'}>
-								<MenuItem
-									icon={<FontAwesomeIcon icon={faUser} />}
-									bgColor={'inherit'}
-									as={'a'}
-									href={`/profile/${ensName || ''}`}
-								>
-									Profile
-								</MenuItem>
+								{ensName ? (
+									<MenuItem
+										icon={<FontAwesomeIcon icon={faUser} />}
+										bgColor={'inherit'}
+										as={'a'}
+										href={`/profile/${ensName || ''}`}
+									>
+										Profile
+									</MenuItem>
+								) : null}
 								<MenuItem
 									icon={<FontAwesomeIcon icon={faWallet} />}
 									bgColor={'inherit'}
@@ -165,6 +171,8 @@ export default function Header() {
 							</MenuList>
 						</Menu>
 					</>
+				) : (
+					<w3m-connect-button />
 				)}
 			</Flex>
 		</Flex>
