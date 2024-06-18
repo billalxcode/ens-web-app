@@ -89,13 +89,14 @@ export default function Profile(props: ProfileProps) {
 				});
 				const owner = await getOwner(client, { name });
 				const expiry = await getExpiry(client, { name });
-				const ensName = await getName(client, {
-					address: MyAddress as `0x${string}`
-				});
-
-				if (ensName.name === name) {
-					console.log('Set primary name');
-					setIsPrimaryName(true);
+				if (MyAddress === owner?.owner) {
+					const ensName = await getName(client, {
+						address: MyAddress as `0x${string}`
+					});
+	
+					if (ensName.name === name) {
+						setIsPrimaryName(true);
+					}
 				}
 				setEnsAvatar(
 					avatarUrl || resolveAvatarURL(name, client.chain.name)
@@ -104,7 +105,6 @@ export default function Profile(props: ProfileProps) {
 				setEnsOwner(owner?.owner || '');
 				setExpiryDate(expiry);
 				setisLoaded(true);
-				console.log(isPrimaryName);
 			} catch (e) {
 				if (e instanceof ContractFunctionExecutionError) {
 				}
