@@ -91,7 +91,7 @@ export default function ModalSetPrimary(props: ModalSetPrimaryNameProps) {
 			setActiveStep(1);
 			const resolver = await setResolver(wallet, {
 				name: props.name,
-				resolverAddress: '0x8FADE66B79cC9f707aB26799354482EB93a5B7dD',
+				resolverAddress: ResolverAddress,
 				contract: 'nameWrapper',
 				account: props.owner as `0x${string}`
 			});
@@ -119,7 +119,7 @@ export default function ModalSetPrimary(props: ModalSetPrimaryNameProps) {
 			setActiveStep(2);
 			const primaryName = await setPrimaryName(wallet, {
 				name: props.name,
-				resolverAddress: '0x8FADE66B79cC9f707aB26799354482EB93a5B7dD',
+				resolverAddress: ResolverAddress,
 				account: props.owner as `0x${string}`,
 				address: props.owner as `0x${string}`
 			});
