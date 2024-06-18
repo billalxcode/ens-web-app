@@ -19,7 +19,8 @@ const theme = extendTheme({
 			text: '#f8f5f8C8',
 			bold: '#5e73e8',
 			secondary: '#36ab61',
-			warning: '#ff9900'
+			warning: '#ff9900',
+			error: '#dc3545'
 		},
 		bg: {
 			body: '#111827',
