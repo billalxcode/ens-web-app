@@ -8,6 +8,7 @@ import {
 import { mainnet, sepolia } from 'viem/chains';
 
 const chain = process.env.NEXT_PUBLIC_APP_ENV == 'prod' ? mainnet : sepolia;
+const blockExplorer = process.env.NEXT_PUBLIC_APP_ENV == 'prod' ? 'https://etherscan.io/tx' : 'https://sepolia.etherscan.io/tx'
 
 const client = createPublicClient({
 	chain: addEnsContracts(chain),
@@ -26,5 +27,5 @@ const createWalletClient = (provider: any) => {
 	return clientWallet;
 };
 
-export { createWalletClient };
+export { createWalletClient, blockExplorer };
 export default client;

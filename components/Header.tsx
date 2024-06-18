@@ -17,6 +17,7 @@ import {
 import { getName, getTextRecord } from '@ensdomains/ensjs/public';
 import {
 	faArrowRightFromBracket,
+	faCog,
 	faTable,
 	faUser,
 	faWallet
@@ -96,7 +97,6 @@ export default function Header() {
 			</Flex>
 			<Flex gap={2}>
 				{isConnected && isLoaded ? (
-					
 					<>
 						<Skeleton
 							isLoaded={isLoaded}
@@ -149,11 +149,21 @@ export default function Header() {
 									</MenuItem>
 								) : null}
 								<MenuItem
+									as={'a'}
+									href="#"
 									icon={<FontAwesomeIcon icon={faWallet} />}
 									bgColor={'inherit'}
 									onClick={() => Web3Open()}
 								>
 									Wallet
+								</MenuItem>
+								<MenuItem
+									as={'a'}
+									icon={<FontAwesomeIcon icon={faCog} />}
+									bgColor={'inherit'}
+									href="/settings"
+								>
+									Settings
 								</MenuItem>
 								<MenuDivider />
 								<MenuItem

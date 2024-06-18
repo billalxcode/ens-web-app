@@ -18,22 +18,26 @@ import {
 	StepTitle,
 	StepDescription,
 	useSteps,
-    useToast
+	useToast
 } from '@chakra-ui/react';
 import ModalSetPrimaryNameProps from '@/interface/props/modal/ModalSetPrimaryNameProps';
 import client, { createWalletClient } from '@/logic/client';
-import { setAddressRecord, setPrimaryName, setResolver } from '@ensdomains/ensjs/wallet';
+import {
+	setAddressRecord,
+	setPrimaryName,
+	setResolver
+} from '@ensdomains/ensjs/wallet';
 import { ResolverAddress } from '@/contracts/resolver';
 import { useWeb3ModalProvider } from '@web3modal/ethers/react';
 import { TransactionExecutionError, UserRejectedRequestError } from 'viem';
 
 export default function ModalSetPrimary(props: ModalSetPrimaryNameProps) {
-	const toast = useToast()
-    const [isLoading, setIsLoading] = useState(false);
-    
-    const { walletProvider } = useWeb3ModalProvider()
+	const toast = useToast();
+	const [isLoading, setIsLoading] = useState(false);
 
-    const primaryNameSteps = useMemo(() => {
+	const { walletProvider } = useWeb3ModalProvider();
+
+	const primaryNameSteps = useMemo(() => {
 		return [
 			{
 				title: 'Step 1',
@@ -55,7 +59,7 @@ export default function ModalSetPrimary(props: ModalSetPrimaryNameProps) {
 		count: primaryNameSteps.length
 	});
 
-    const handleSetPrimaryName = async () => {
+	const handleSetPrimaryName = async () => {
 		try {
 			setIsLoading(true);
 			const wallet = createWalletClient(walletProvider);
@@ -144,10 +148,10 @@ export default function ModalSetPrimary(props: ModalSetPrimaryNameProps) {
 				}
 			});
 			await primaryNamePromise;
-			setActiveStep(3)
-			props.onClose()
+			setActiveStep(3);
+			props.onClose();
 		} catch (e: any) {
-            if (
+			if (
 				e instanceof UserRejectedRequestError ||
 				e instanceof TransactionExecutionError
 			) {
@@ -163,7 +167,7 @@ export default function ModalSetPrimary(props: ModalSetPrimaryNameProps) {
 					description: e.reason
 				});
 			}
-        }
+		}
 	};
 
 	return (
@@ -175,7 +179,9 @@ export default function ModalSetPrimary(props: ModalSetPrimaryNameProps) {
 		>
 			<ModalOverlay bg="blackAlpha.300" backdropFilter="blur(10px)" />
 			<ModalContent bgColor={'bg.card'}>
-				<ModalHeader textAlign={'center'}>Set Primary Name</ModalHeader>
+				<ModalHeader textAlign={'center'}>
+					Set Primary Name {props.name}
+				</ModalHeader>
 				<ModalCloseButton />
 				<ModalBody>
 					<Stepper
