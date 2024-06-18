@@ -138,7 +138,6 @@ export default function FormCommit(props: FormCommitProps) {
 			});
 
 			await commitmentPromise;
-			console.log('Done commitment');
 			setActiveStep(1);
 			setIsStartCountdown(true);
 			const commitmentTimeout = new Promise((resolve) => {
@@ -161,12 +160,10 @@ export default function FormCommit(props: FormCommitProps) {
 			await commitmentTimeout;
 			setIsStartCountdown(false);
 			setActiveStep(2);
-			console.log('Getting payment prices');
 			const prices: any = await getPaymentPrices(
 				params.name,
 				props.duration
 			);
-			console.log(prices);
 			const paymentPromise = handlePayment(wallet, params, prices[1]);
 			toast.promise(paymentPromise, {
 				success: {

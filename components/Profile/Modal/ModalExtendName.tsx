@@ -84,7 +84,6 @@ export default function ModalExtendName(props: ModalExtendNameProps) {
 				resolve(hash);
 			} catch (e: any) {
 				if (e instanceof TransactionExecutionError) {
-					console.log(e.shortMessage);
 					toast({
 						status: 'error',
 						title: e.shortMessage
