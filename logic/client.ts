@@ -7,7 +7,7 @@ import {
 } from 'viem';
 import { mainnet, sepolia } from 'viem/chains';
 
-const chain = process.env.NEXT_PUBLIC_APP_ENV == 'prod' ? mainnet : sepolia
+const chain = process.env.NEXT_PUBLIC_APP_ENV == 'prod' ? mainnet : sepolia;
 
 const client = createPublicClient({
 	chain: addEnsContracts(chain),
