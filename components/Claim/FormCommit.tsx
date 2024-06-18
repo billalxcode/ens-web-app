@@ -26,9 +26,7 @@ import {
 	makeRegistrationTuple,
 	randomSecret
 } from '@ensdomains/ensjs/utils';
-import {
-	commitName,
-} from '@ensdomains/ensjs/wallet';
+import { commitName } from '@ensdomains/ensjs/wallet';
 import client, { createWalletClient } from '@/logic/client';
 import { useWeb3ModalProvider } from '@web3modal/ethers/react';
 import {
@@ -39,6 +37,7 @@ import {
 import { getPaymentPrices } from '@/logic/prices';
 import { sendPayment } from '@/logic/payment';
 import ButtonCountdown from '../ButtonCountdown';
+import { ResolverAddress } from '@/contracts/resolver';
 
 export default function FormCommit(props: FormCommitProps) {
 	const toast = useToast();
@@ -98,7 +97,7 @@ export default function FormCommit(props: FormCommitProps) {
 					toast({
 						status: 'error',
 						title: e.shortMessage
-					})
+					});
 					reject(e.shortMessage);
 				}
 				reject(e.reason);
@@ -120,51 +119,24 @@ export default function FormCommit(props: FormCommitProps) {
 				account: walletOwner
 			};
 
-			let commitmentPromise;
-			try {
-				let commit = await commitName(wallet, params);
-				commitmentPromise = new Promise(async (resolve) => {
-					const commitmentInterval = setInterval(async () => {
-						try {
-							const receipt = await client.getTransactionReceipt({ hash: commit })
-							console.log(receipt)
-							clearInterval(commitmentInterval)
-							resolve(receipt)
-						} catch (e) {
-							if (e instanceof TransactionReceiptNotFoundError) {
-								console.log(e.shortMessage)
-							}
-						}
-					}, 1500)
-					// console.log('Wait for transaction receipt');
-					// (await client.getTransactionReceipt({ hash: commit})).status
-					// let response = await client.waitForTransactionReceipt({
-					// 	hash: commit
-					// });
-					// console.log(response);
-					// resolve(response);
-				});
-			} catch (error) {
-				commitmentPromise = Promise.reject();
-			} finally {
-				if (commitmentPromise) {
-					toast.promise(commitmentPromise, {
-						success: {
-							title: 'Success',
-							description: 'Transaction success'
-						},
-						error: {
-							title: 'Error',
-							description: 'Failed to send transaction',
-							onCloseComplete: () => props.setStep('failed')
-						},
-						loading: {
-							title: 'Please wait',
-							description: 'Please wait for transaction receipt'
-						}
-					});
+			const commit = await commitName(wallet, params);
+			const commitmentPromise = client.waitForTransactionReceipt({ hash: commit })
+			toast.promise(commitmentPromise, {
+				success: {
+					title: 'Success',
+					description: 'Transaction success'
+				},
+				error: {
+					title: 'Error',
+					description: 'Failed to send transaction',
+					onCloseComplete: () => props.setStep('failed')
+				},
+				loading: {
+					title: 'Please wait',
+					description: 'Please wait for transaction receipt'
 				}
-			}
+			});
+
 			await commitmentPromise;
 			console.log('Done commitment');
 			setActiveStep(1);
@@ -189,12 +161,12 @@ export default function FormCommit(props: FormCommitProps) {
 			await commitmentTimeout;
 			setIsStartCountdown(false);
 			setActiveStep(2);
-			console.log("Getting payment prices")
+			console.log('Getting payment prices');
 			const prices: any = await getPaymentPrices(
 				params.name,
 				props.duration
 			);
-			console.log(prices)
+			console.log(prices);
 			const paymentPromise = handlePayment(wallet, params, prices[1]);
 			toast.promise(paymentPromise, {
 				success: {
