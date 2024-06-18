@@ -59,7 +59,7 @@ export default function Home() {
 
 	return (
 		<>
-			<Flex flexDirection={'column'} h={['80vh', '80vh']} mx={[2, 0]}>
+			<Flex flexDirection={'column'} h={['100vh', '100vh']} mx={[2, 0]}>
 				<Flex
 					mt={70}
 					align={'center'}
@@ -151,7 +151,6 @@ export default function Home() {
 
 			<Box w={'full'} bg={'bg.body2'} pb={100}>
 				<Flex
-					my={100}
 					flexDirection={'column'}
 					justify={'center'}
 					align={'center'}
