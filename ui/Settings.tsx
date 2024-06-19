@@ -52,17 +52,19 @@ export default function Settings() {
 		(async () => {
 			if (isConnected && address) {
 				let name = await getName(client, { address });
-				const historiesSubgraphs = await getNameHistory(client, {
-					name: name.name.normalize()
-				});
-				setHistores(historiesSubgraphs);
+				if (name !== null) {
+					const historiesSubgraphs = await getNameHistory(client, {
+						name: name.name.normalize()
+					});
+					setHistores(historiesSubgraphs);
+				}
 			}
 			setIsLoaded(true);
 		})();
 	}, [isConnected, address]);
 
 	const onSelectedName = (name: string) => {
-		onChooseNameClose()
+		onChooseNameClose();
 		setNameSelected(name);
 		onSetPrimaryNameOpen();
 	};
